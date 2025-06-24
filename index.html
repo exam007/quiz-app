@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>-ข้อสอบ</title>
+  <style>
+    :root {
+      --neumorphic-bg: #e0e5ec; /* Light background for neumorphism */
+      --neumorphic-light-shadow: #ffffff;
+      --neumorphic-dark-shadow: #a7a9af;
+      --primary-text: #222;
+      --accent-color: #4f46e5;
+      --card-radius: 24px;
+      --error-color: #e11d48;
+      --success-color: #10b981;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--neumorphic-bg); /* Use solid neumorphic background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .container {
+      background: var(--neumorphic-bg); /* Match body background */
+      border-radius: var(--card-radius);
+      padding: 40px 30px;
+      max-width: 500px;
+      width: 100%;
+      /* Neumorphic shadow for container */
+      box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow),
+                  -6px -6px 12px var(--neumorphic-light-shadow);
+      color: var(--primary-text);
+      transition: all 0.3s ease; /* Smooth transitions */
+    }
+    
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--primary-text);
+    }
+    
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-size: 1rem;
+      border: none; /* Remove default border */
+      background: var(--neumorphic-bg); /* Match background */
+      color: var(--primary-text);
+      /* Inset shadow for input field */
+      box-shadow: inset 2px 2px 5px var(--neumorphic-dark-shadow),
+                  inset -3px -3px 7px var(--neumorphic-light-shadow);
+      transition: all 0.3s ease;
+    }
+    
+    input:focus {
+      outline: none;
+      /* Slightly more pronounced inset on focus */
+      box-shadow: inset 1px 1px 2px var(--neumorphic-dark-shadow),
+                  inset -1px -1px 2px var(--neumorphic-light-shadow),
+                  0 0 0 3px rgba(79, 70, 229, 0.1); /* Keep a subtle accent focus ring */
+    }
+    
+    input::placeholder {
+      color: #666;
+    }
+    
+    .button-group {
+      display: flex;
+      gap: 10px; /* Space between buttons */
+      margin-top: 10px;
+      width: 100%; /* Explicitly make button group full width */
+      flex-wrap: wrap; /* Allow buttons to wrap to next line on small screens if many */
+    }
+
+    .button-group button {
+      width: 50%; /* Make buttons share width */
+      flex-grow: 1; /* Allow buttons to grow */
+      margin-top: 0; /* Override previous margin-top */
+    }
+
+    button {
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-size: 1rem;
+      border: none; /* Remove default border */
+      background: var(--neumorphic-bg); /* Neumorphic background */
+      color: var(--primary-text); /* Use primary text color for neumorphic buttons */
+      font-weight: bold;
+      cursor: pointer;
+      /* Outset shadow for a raised button */
+      box-shadow: 3px 3px 6px var(--neumorphic-dark-shadow),
+                  -3px -3px 6px var(--neumorphic-light-shadow);
+      transition: all 0.3s ease;
+    }
+    
+    button:hover:not(:disabled) {
+      /* Inset shadow on hover to simulate pressing */
+      box-shadow: inset 2px 2px 5px var(--neumorphic-dark-shadow),
+                  inset -2px -2px 5px var(--neumorphic-light-shadow);
+      transform: translateY(0); /* Remove previous translateY on hover */
+      color: var(--accent-color); /* Subtle color change on hover */
+    }
+    
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: 2px 2px 4px var(--neumorphic-dark-shadow) inset; /* Slightly depressed look when disabled */
+    }
+    
+    .option {
+      background: var(--neumorphic-bg);
+      padding: 15px 20px;
+      margin: 12px 0;
+      border-radius: 12px;
+      border: none; /* Remove border */
+      cursor: pointer;
+      /* Neumorphic shadow for options */
+      box-shadow: 3px 3px 6px var(--neumorphic-dark-shadow),
+                  -3px -3px 6px var(--neumorphic-light-shadow);
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    
+    .option:hover {
+      /* Inset shadow on hover to simulate pressing */
+      box-shadow: inset 2px 2px 5px var(--neumorphic-dark-shadow),
+                  inset -2px -2px 5px var(--neumorphic-light-shadow);
+      color: var(--accent-color); /* Subtle color change on hover */
+    }
+    
+    .option.selected {
+      background: var(--accent-color); /* Keep the accent color for selected */
+      color: white;
+      /* Inset shadow for selected state */
+      box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3),
+                  inset -2px -2px 5px rgba(255,255,255,0.1);
+      border-color: transparent;
+    }
+    
+    .message {
+      text-align: center;
+      padding: 12px;
+      border-radius: 12px;
+      margin: 15px 0;
+      font-weight: 500;
+      /* Neumorphic shadow for messages, subtle */
+      box-shadow: 2px 2px 4px var(--neumorphic-dark-shadow),
+                  -2px -2px 4px var(--neumorphic-light-shadow);
+    }
+    
+    .message.error {
+      background: rgba(225, 29, 72, 0.1);
+      color: var(--error-color);
+      /* Border could be more neumorphic or match shadow */
+      border: none; 
+    }
+    
+    .message.success {
+      background: rgba(16, 185, 129, 0.1);
+      color: var(--success-color);
+      border: none;
+    }
+    
+    .question-box, .result-box {
+      display: none;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--neumorphic-bg);
+      border-radius: 4px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      /* Inset shadow for progress bar track */
+      box-shadow: inset 2px 2px 5px var(--neumorphic-dark-shadow),
+                  inset -3px -3px 7px var(--neumorphic-light-shadow);
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, #4f46e5, #3b82f6); /* Keep vibrant gradient for fill */
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    
+    .question-counter {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+    }
+    
+    .spinner {
+      border: 3px solid rgba(79, 70, 229, 0.1);
+      border-radius: 50%;
+      border-top: 3px solid var(--accent-color);
+      width: 30px;
+      height: 30px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 15px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Styles for the answer review section */
+    .answer-review {
+      margin-top: 30px;
+      border-top: 1px solid rgba(0,0,0,0.1); /* Keep subtle separator */
+      padding-top: 20px;
+    }
+    
+    .answer-review h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    
+    .answer-item {
+      background: var(--neumorphic-bg); /* Neumorphic background */
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      /* Initial neumorphic shadow, overridden by correct/incorrect borders */
+      box-shadow: 3px 3px 6px var(--neumorphic-dark-shadow),
+                  -3px -3px 6px var(--neumorphic-light-shadow);
+      transition: all 0.3s ease;
+    }
+
+    /* New styles for correct/incorrect answer item borders */
+    .answer-item.correct-border {
+      /* Inset shadow for correct answer item, blending with success color */
+      box-shadow: inset 2px 2px 5px var(--success-color),
+                  inset -2px -2px 5px rgba(255,255,255,0.1),
+                  0 0 0 2px var(--success-color); /* Thin green border */
+    }
+
+    .answer-item.incorrect-border {
+      /* Inset shadow for incorrect answer item, blending with error color */
+      box-shadow: inset 2px 2px 5px var(--error-color),
+                  inset -2px -2px 5px rgba(255,255,255,0.1),
+                  0 0 0 2px var(--error-color); /* Thin red border */
+    }
+
+    .answer-item p {
+      margin-bottom: 8px;
+    }
+
+    .answer-item strong {
+      color: var(--primary-text);
+    }
+    
+    .answer-item .question-text {
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .answer-item .user-answer {
+      color: var(--error-color); /* Default to red */
+      font-weight: 500;
+    }
+    
+    .answer-item .user-answer.correct {
+      color: var(--success-color); /* Green if correct */
+    }
+
+    .answer-item .correct-answer {
+      color: #2563eb; /* Blue for correct answer */
+      font-weight: 500;
+    }
+    
+    .answer-item .explanation {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(0,0,0,0.1);
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    /* --- New/Modified Styles for Login Page Layout --- */
+    #loginBox button {
+        width: 100%; /* Make login button full width */
+        margin-top: 20px; /* Add some space below input */
+    }
+
+    /* Make message box also full width with neumorphic shadow */
+    .message {
+        width: 100%; /* Ensure full width */
+        margin-top: 20px; /* Space between button and message */
+        box-shadow: inset 2px 2px 5px var(--neumorphic-dark-shadow),
+                    inset -3px -3px 7px var(--neumorphic-light-shadow); /* Inset shadow for message */
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 30px 20px;
+        margin: 10px;
+      }
+      
+      input, button {
+        padding: 12px 14px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <!-- หน้าล็อกอิน (แสดงเป็นหน้าแรก) -->
+  <div id="loginBox" style="display:block;">
+    <h2>เข้าสู่ระบบ</h2>
+    <div class="form-group">
+      <label for="usernameInput">ชื่อผู้ใช้:</label>
+      <input type="text" id="usernameInput" placeholder="กรอกชื่อผู้ใช้ของคุณ">
+    </div>
+    <button onclick="attemptLogin()">เข้าสู่ระบบ</button>
+    <div id="loginMessage" class="message" style="display:none;"></div>
+  </div>
+
+  <!-- หน้าโหลด (ซ่อนไว้ตอนเริ่มต้น) -->
+  <div id="loadingBox" class="loading" style="display:none;">
+    <div class="spinner"></div>
+    <p>กำลังโหลดข้อสอบ...</p>
+  </div>
+
+  <!-- หน้าสอบ (ซ่อนไว้ตอนเริ่มต้น) -->
+  <div id="quizBox" class="question-box" style="display:none;">
+    <div class="progress-bar">
+      <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+    </div>
+    
+    <div id="questionCounter" class="question-counter"></div>
+    <h2 id="questionText"></h2>
+    <div id="options"></div>
+    
+    <div class="button-group">
+      <button id="backBtn" onclick="previousQuestion()">ย้อนกลับ</button>
+      <button id="nextBtn" onclick="nextQuestion()">ถัดไป</button>
+    </div>
+  </div>
+
+  <!-- หน้าผลลัพธ์ (ซ่อนไว้ตอนเริ่มต้น) -->
+  <div id="resultBox" class="result-box" style="display:none;">
+    <h2>ผลลัพธ์การสอบ</h2>
+    <div id="scoreDisplay"></div>
+    <div id="answerReview"></div> 
+    <button onclick="resetQuiz()">ทำใหม่</button> 
+  </div>
+</div>
+
+<script>
+// **สำคัญมาก: ต้องเปลี่ยน URL นี้เป็น URL ที่ได้จากการ Deploy Apps Script ของคุณเสมอ**
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz6Lr_tetTrlB-fLI4P5cza-IV2EXST8O1bn1wfo1fjObNjo_YllxA3042wN7vHf5cl6w/exec'; 
+
+// --- ตัวแปรหลัก ---
+let questions = [];
+let currentQuestion = 0;
+let userName = ''; // จะเก็บ username ที่ผู้ใช้ป้อนและตรวจสอบสำเร็จ
+let displayUserName = ''; // จะเก็บ 'ชื่อ' ที่ดึงมาจาก Sheet (ช่อง D)
+let userAnswers = []; // เก็บ index ของตัวเลือกที่ผู้ใช้เลือก
+let startTime;
+
+// --- ฟังก์ชันสำหรับจัดการ UI และการทำงาน ---
+
+// ฟังก์ชันแสดงข้อความแจ้งเตือนบน UI
+function showMessage(text, type = 'error', targetElementId = 'loginMessage') {
+  const messageElement = document.getElementById(targetElementId);
+  if (messageElement) {
+    messageElement.textContent = text;
+    messageElement.className = `message ${type}`;
+    messageElement.style.display = 'block';
+    // **แก้ไข: ลบ setTimeout ออกเพื่อให้ข้อความค้างไว้**
+    // หากต้องการให้ข้อความหายไปเมื่อมีการกดปุ่ม "เข้าสู่ระบบ" ใหม่
+    // เราจะจัดการการซ่อนข้อความในฟังก์ชัน attemptLogin()
+  } else {
+    console.error(`Target element for message not found: ${targetElementId}`);
+  }
+}
+
+// ฟังก์ชันสลับการแสดงผลของหน้าต่างๆ
+function switchView(viewId) {
+    ['loginBox', 'loadingBox', 'quizBox', 'resultBox'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.style.display = (id === viewId) ? 'block' : 'none';
+        }
+    });
+}
+
+
+// --- Logic การทำงานของแบบทดสอบ ---
+
+// 1. ฟังก์ชันพยายามล็อกอิน
+async function attemptLogin() {
+  const usernameInput = document.getElementById('usernameInput');
+  const enteredUsername = usernameInput.value.trim();
+
+  // **แก้ไข: ซ่อนข้อความแจ้งเตือนเก่าทันทีเมื่อมีการพยายามเข้าสู่ระบบใหม่**
+  const loginMessageElement = document.getElementById('loginMessage');
+  if (loginMessageElement) {
+      loginMessageElement.style.display = 'none';
+      loginMessageElement.textContent = ''; // เคลียร์ข้อความด้วย
+  }
+
+  if (!enteredUsername) {
+    showMessage('กรุณากรอกชื่อผู้ใช้', 'error', 'loginMessage');
+    return;
+  }
+  
+  switchView('loadingBox'); // แสดงหน้าโหลด
+  // showMessage('', 'info', 'loginMessage'); // ย้ายการเคลียร์ข้อความไปทำก่อนหน้าแล้ว
+
+  try {
+    const response = await fetch(`${SCRIPT_URL}?action=checkUser&username=${encodeURIComponent(enteredUsername)}`);
+    if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+    const data = await response.json();
+
+    if (data.success && data.valid) {
+      userName = data.username; // เก็บ username จริงที่ใช้ในการตรวจสอบ
+      displayUserName = data.name; // เก็บชื่อที่ใช้แสดงผล (จากช่อง D)
+      startQuiz(); // เริ่มโหลดข้อสอบหลังจากล็อกอินสำเร็จ
+    } else {
+      switchView('loginBox'); // กลับไปหน้าล็อกอิน
+      showMessage(data.message || 'ไม่สามารถเข้าสู่ระบบได้', 'error', 'loginMessage');
+    }
+  } catch (error) {
+    console.error('Error during login:', error);
+    switchView('loginBox'); // กลับไปหน้าล็อกอิน
+    showMessage('เกิดข้อผิดพลาดในการเชื่อมต่อ: ' + error.message, 'error', 'loginMessage');
+  }
+}
+
+// 2. ฟังก์ชันเริ่มโหลดข้อสอบ (ถูกเรียกหลังจากล็อกอินสำเร็จ)
+async function startQuiz() {
+  // ไม่ต้องสลับ view ที่นี่ เพราะทำใน attemptLogin แล้ว
+  
+  // ล้างค่าสำหรับเริ่มสอบใหม่
+  questions = [];
+  currentQuestion = 0;
+  userAnswers = [];
+  
+  try {
+    const questionsResponse = await fetch(`${SCRIPT_URL}?action=getQuestions`);
+    if (!questionsResponse.ok) {
+        throw new Error(`Network response was not ok: ${questionsResponse.statusText}`);
+    }
+    const questionsData = await questionsResponse.json();
+    
+    if (!questionsData.success || !questionsData.data || questionsData.data.length === 0) {
+      throw new Error(questionsData.message || 'ไม่มีข้อสอบในระบบ');
+    }
+    
+    questions = questionsData.data;
+    startTime = new Date(); // เริ่มจับเวลาเมื่อโหลดข้อสอบสำเร็จ
+    
+    // เปลี่ยนไปหน้าข้อสอบ
+    switchView('quizBox');
+    showQuestion();
+
+  } catch (error) {
+    console.error('Error starting quiz:', error);
+    switchView('loginBox'); // กลับไปหน้าล็อกอินเพื่อให้ผู้ใช้เห็นข้อผิดพลาด
+    showMessage(`Error: ${error.message}`, 'error', 'loginMessage'); 
+  }
+}
+
+// 3. ฟังก์ชันแสดงคำถามปัจจุบัน
+function showQuestion() {
+  if (currentQuestion >= questions.length) {
+    showResult();
+    return;
+  }
+  
+  const question = questions[currentQuestion];
+  const progress = ((currentQuestion) / questions.length) * 100;
+  
+  // อัปเดต UI
+  document.getElementById('progressFill').style.width = `${progress}%`;
+  document.getElementById('questionCounter').textContent = `ข้อที่ ${currentQuestion + 1} จาก ${questions.length}`;
+  document.getElementById('questionText').textContent = question.question;
+  
+  // สร้างตัวเลือก
+  const optionsContainer = document.getElementById('options');
+  optionsContainer.innerHTML = '';
+  
+  question.options.forEach((option, index) => {
+    if (typeof option === 'string' && option.trim() !== '') {
+      const optionDiv = document.createElement('div');
+      optionDiv.className = 'option';
+      optionDiv.textContent = option;
+      optionDiv.onclick = () => selectOption(index, optionDiv);
+      optionsContainer.appendChild(optionDiv);
+
+      // Restore selected option visual if user came back to this question
+      if (userAnswers[currentQuestion] === index) {
+        optionDiv.classList.add('selected');
+      }
+    }
+  });
+  
+  // อัปเดตข้อความและสถานะของปุ่ม "ถัดไป" และ "ย้อนกลับ"
+  const nextBtn = document.getElementById('nextBtn');
+  const backBtn = document.getElementById('backBtn');
+
+  nextBtn.textContent = currentQuestion === questions.length - 1 ? 'จบการสอบ' : 'ถัดไป';
+  backBtn.disabled = currentQuestion === 0;
+}
+
+function selectOption(index, element) {
+  // Remove 'selected' class from all options in the current question
+  const options = element.parentElement.querySelectorAll('.option');
+  options.forEach(opt => opt.classList.remove('selected'));
+  
+  // Add 'selected' class to the clicked option
+  element.classList.add('selected');
+  userAnswers[currentQuestion] = index;
+}
+
+function nextQuestion() {
+  if (userAnswers[currentQuestion] === undefined) {
+    alert('กรุณาเลือกคำตอบก่อนดำเนินการต่อ'); // **ข้อควรระวัง: ควรเปลี่ยน alert นี้เป็นข้อความบน UI**
+    return;
+  }
+  
+  currentQuestion++;
+  showQuestion();
+}
+
+function previousQuestion() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    showQuestion();
+  }
+}
+
+// 4. ฟังก์ชันแสดงผลลัพธ์และบันทึก
+async function showResult() {
+  switchView('resultBox');
+  
+  const endTime = new Date();
+  const timeSpent = Math.floor((endTime - startTime) / 1000);
+  
+  let correctCount = 0;
+  for (let i = 0; i < questions.length; i++) {
+    if (userAnswers[i] !== undefined && questions[i] && questions[i].correct !== undefined && userAnswers[i] === questions[i].correct) {
+        correctCount++;
+    }
+  }
+  const percentage = (questions.length > 0) ? (correctCount / questions.length) * 100 : 0;
+
+  // แสดงผลคะแนน
+  document.getElementById('scoreDisplay').innerHTML = `
+    <div class="message success">
+      <h3>คะแนนของคุณ: ${percentage.toFixed(1)}%</h3>
+      <p>คุณ ${displayUserName || userName} ตอบถูก ${correctCount} ข้อ จากทั้งหมด ${questions.length} ข้อ</p>
+      <p>ใช้เวลา ${Math.floor(timeSpent / 60)} นาที ${timeSpent % 60} วินาที</p>
+    </div>
+  `;
+
+  // แสดงเฉลย
+  const answerReviewContainer = document.getElementById('answerReview');
+  answerReviewContainer.innerHTML = '<h3 class="answer-review">เฉลยและคำอธิบาย</h3>';
+  questions.forEach((question, index) => {
+    const userAnswerIndex = userAnswers[index];
+    const userAnswerText = userAnswerIndex !== undefined && question.options[userAnswerIndex] !== undefined ? question.options[userAnswerIndex] : 'ไม่ได้ตอบ';
+    const correctAnswerText = question.options[question.correct] !== undefined ? question.options[question.correct] : 'ไม่ทราบ';
+    const isCorrect = userAnswerIndex === question.correct;
+
+    const answerItemDiv = document.createElement('div');
+    answerItemDiv.className = `answer-item ${isCorrect ? 'correct-border' : 'incorrect-border'}`;
+   
+    answerItemDiv.innerHTML = `
+      <p class="question-text">ข้อ ${index + 1}: ${question.question}</p>
+      <p>คำตอบของคุณ: <span class="user-answer ${isCorrect ? 'correct' : ''}">${userAnswerText}</span></p>
+      <p>คำตอบที่ถูกต้อง: <span class="correct-answer">${correctAnswerText}</span></p>
+      ${question.explanation ? `<p class="explanation">คำอธิบาย: ${question.explanation}</p>` : ''}
+    `;
+    answerReviewContainer.appendChild(answerItemDiv);
+  });
+
+  // บันทึกผลสอบ
+  try {
+    const resultData = {
+      userName: userName,
+      userCode: '', // ไม่ได้ใช้แล้ว
+      score: percentage, 
+      correctAnswers: correctCount, 
+      totalQuestions: questions.length,
+      answers: userAnswers,
+      timeSpent: timeSpent,
+      ipAddress: '' // ต้องดึงจากฝั่ง server-side (Apps Script) หากต้องการ
+    };
+    
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(resultData),
+      headers: { "Content-Type": "application/json" }
+    });
+    console.log("ส่งคำขอเพื่อบันทึกผลสอบแล้ว");
+    
+  } catch (error) {
+    console.error('เกิดข้อผิดพลาดในการบันทึกผลสอบ:', error);
+    // You might want to show this error on the result page
+  }
+}
+
+// 5. ฟังก์ชันรีเซ็ตกลับไปหน้าล็อกอิน
+function resetQuiz() {
+    // รีเซ็ตตัวแปรสถานะ
+    questions = [];
+    currentQuestion = 0;
+    userName = '';
+    displayUserName = '';
+    userAnswers = [];
+    startTime = null; 
+
+    // เคลียร์ค่า input และข้อความ
+    const usernameInput = document.getElementById('usernameInput');
+    if(usernameInput) usernameInput.value = '';
+    // **แก้ไข: เคลียร์ข้อความแจ้งเตือนด้วยเมื่อกดทำใหม่/รีเซ็ต**
+    const loginMessageElement = document.getElementById('loginMessage');
+    if (loginMessageElement) {
+        loginMessageElement.style.display = 'none';
+        loginMessageElement.textContent = '';
+    }
+    
+    // กลับไปหน้าล็อกอิน
+    switchView('loginBox');
+}
+
+// Event Listener: เริ่มต้นการทำงานเมื่อหน้าเว็บโหลดเสร็จ
+document.addEventListener('DOMContentLoaded', function() {
+    // เริ่มต้นโดยการแสดงหน้าล็อกอินเท่านั้น
+    switchView('loginBox');
+});
+</script>
+</body>
+</html>
