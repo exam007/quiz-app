@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>-ข้อสอบ</title>
+  <title>แบบทดสอบ ภาค ก. ท้องถิ่น กฎหมาย 200 ข้อ</title>
   <style>
     :root {
       --neumorphic-bg: #e0e5ec; /* Light background for neumorphism */
@@ -49,12 +49,6 @@
       margin-bottom: 25px;
       font-weight: 600;
     }
-
-    /* Specific style for the question text to make it half size */
-    #questionText {
-        font-size: 1rem; /* Half of typical 2rem for h2, or approx 16px */
-        margin-bottom: 20px; /* Adjust margin if needed after size change */
-    }
     
     .form-group {
       margin-bottom: 20px;
@@ -95,7 +89,6 @@
     
     .button-group {
       display: flex;
-      justify-content: space-between; /* To push buttons to opposite ends */
       gap: 10px; /* Space between buttons */
       margin-top: 10px;
       width: 100%; /* Explicitly make button group full width */
@@ -103,15 +96,15 @@
     }
 
     .button-group button {
-      flex-grow: 1; /* Allow buttons to grow and fill space */
-      flex-basis: calc(50% - 5px); /* Ensures approximately half width minus half of gap */
+      width: 50%; /* Make buttons share width */
+      flex-grow: 1; /* Allow buttons to grow */
       margin-top: 0; /* Override previous margin-top */
-      font-size: 1rem; /* Revert button font size to standard for readability */
     }
 
     button {
       padding: 14px 16px;
       border-radius: 16px;
+      font-size: 1rem;
       border: none; /* Remove default border */
       background: var(--neumorphic-bg); /* Neumorphic background */
       color: var(--primary-text); /* Use primary text color for neumorphic buttons */
@@ -182,6 +175,7 @@
     .message.error {
       background: rgba(225, 29, 72, 0.1);
       color: var(--error-color);
+      /* Border could be more neumorphic or match shadow */
       border: none; 
     }
     
@@ -218,7 +212,7 @@
       text-align: center;
       margin-bottom: 15px;
       color: #666;
-      font-size: 0.9rem;
+      font-size: 0.5rem;
     }
     
     .loading {
@@ -317,12 +311,18 @@
       color: #555;
     }
 
-    /* Add a specific message div for quiz context messages */
-    #quizBox .message {
-        margin-top: 15px; /* Adjust spacing for messages within quiz box */
-        /* Make sure it has neumorphic shadow for consistency */
+    /* --- New/Modified Styles for Login Page Layout --- */
+    #loginBox button {
+        width: 100%; /* Make login button full width */
+        margin-top: 20px; /* Add some space below input */
+    }
+
+    /* Make message box also full width with neumorphic shadow */
+    .message {
+        width: 100%; /* Ensure full width */
+        margin-top: 20px; /* Space between button and message */
         box-shadow: inset 2px 2px 5px var(--neumorphic-dark-shadow),
-                    inset -3px -3px 7px var(--neumorphic-light-shadow);
+                    inset -3px -3px 7px var(--neumorphic-light-shadow); /* Inset shadow for message */
     }
 
     @media (max-width: 480px) {
@@ -333,19 +333,26 @@
       
       input, button {
         padding: 12px 14px;
-        font-size: 0.95rem; /* Base font size for input/buttons on small screens */
-      }
-      /* Adjust font size for buttons on smaller screens if 0.5rem is too small */
-      .button-group button {
-        font-size: 0.95rem; /* Slightly larger for readability on small devices */
+        font-size: 0.95rem;
       }
     }
   </style>
 </head>
 <body>
 <div class="container">
+  <!-- หน้าล็อกอิน (แสดงเป็นหน้าแรก) -->
+  <div id="loginBox" style="display:block;">
+    <h2>เข้าสู่ระบบ</h2>
+    <div class="form-group">
+      <label for="usernameInput">ชื่อผู้ใช้:</label>
+      <input type="text" id="usernameInput" placeholder="กรอกชื่อผู้ใช้ของคุณ">
+    </div>
+    <button onclick="attemptLogin()">เข้าสู่ระบบ</button>
+    <div id="loginMessage" class="message" style="display:none;"></div>
+  </div>
+
   <!-- หน้าโหลด (ซ่อนไว้ตอนเริ่มต้น) -->
-  <div id="loadingBox" class="loading" style="display:block;">
+  <div id="loadingBox" class="loading" style="display:none;">
     <div class="spinner"></div>
     <p>กำลังโหลดข้อสอบ...</p>
   </div>
@@ -360,11 +367,9 @@
     <h2 id="questionText"></h2>
     <div id="options"></div>
     
-    <div id="quizMessage" class="message" style="display:none;"></div> <!-- New message div for quiz context -->
-
     <div class="button-group">
-      <button id="backBtn" onclick="previousQuestion()">ย้อนกลับ</button>
       <button id="nextBtn" onclick="nextQuestion()">ถัดไป</button>
+      <button id="backBtn" onclick="previousQuestion()">ย้อนกลับ</button>
     </div>
   </div>
 
@@ -378,29 +383,29 @@
 </div>
 
 <script>
-// กำหนด URL ของ Google Apps Script
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz4UNLa4_8BopPbroWKgKlChJYeI0KZ6UPpzEadomePFvw48G9GHmBZy6bzXXpJOSTXzA/exec'; // ตรวจสอบให้แน่ใจว่า URL นี้ถูกต้องและมาจากการ Deploy ล่าสุด!
+// **สำคัญมาก: ต้องเปลี่ยน URL นี้เป็น URL ที่ได้จากการ Deploy Apps Script ของคุณเสมอ**
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz6Lr_tetTrlB-fLI4P5cza-IV2EXST8O1bn1wfo1fjObNjo_YllxA3042wN7vHf5cl6w/exec'; 
 
-// ตัวแปรหลัก
+// --- ตัวแปรหลัก ---
 let questions = [];
 let currentQuestion = 0;
-let userName = ''; // ไม่มีหน้าล็อกอินแล้ว จึงไม่ได้ใช้ แต่เก็บไว้เพื่อ saveResult (จะเป็นค่าว่าง)
-let userCode = ''; // ไม่มีหน้าล็อกอินแล้ว จึงไม่ได้ใช้ แต่เก็บไว้เพื่อ saveResult (จะเป็นค่าว่าง)
+let userName = ''; // จะเก็บ username ที่ผู้ใช้ป้อนและตรวจสอบสำเร็จ
+let displayUserName = ''; // จะเก็บ 'ชื่อ' ที่ดึงมาจาก Sheet (ช่อง D)
 let userAnswers = []; // เก็บ index ของตัวเลือกที่ผู้ใช้เลือก
 let startTime;
 
-// ฟังก์ชันแสดงข้อความ (ตอนนี้ใช้สำหรับ Error ใน Console หรือสามารถปรับให้แสดงบนหน้าเว็บได้)
-function showMessage(text, type = 'error', targetElementId = 'quizMessage') {
+// --- ฟังก์ชันสำหรับจัดการ UI และการทำงาน ---
+
+// ฟังก์ชันแสดงข้อความแจ้งเตือนบน UI
+function showMessage(text, type = 'error', targetElementId = 'loginMessage') {
   const messageElement = document.getElementById(targetElementId);
   if (messageElement) {
     messageElement.textContent = text;
     messageElement.className = `message ${type}`;
     messageElement.style.display = 'block';
-    // หากเป็นข้อความในหน้า quiz ให้ซ่อนหลังจาก 3 วินาที
-    setTimeout(() => { 
-        messageElement.style.display = 'none';
-        messageElement.textContent = '';
-    }, 3000);
+    // **แก้ไข: ลบ setTimeout ออกเพื่อให้ข้อความค้างไว้**
+    // หากต้องการให้ข้อความหายไปเมื่อมีการกดปุ่ม "เข้าสู่ระบบ" ใหม่
+    // เราจะจัดการการซ่อนข้อความในฟังก์ชัน attemptLogin()
   } else {
     console.error(`Target element for message not found: ${targetElementId}`);
   }
@@ -408,7 +413,7 @@ function showMessage(text, type = 'error', targetElementId = 'quizMessage') {
 
 // ฟังก์ชันสลับการแสดงผลของหน้าต่างๆ
 function switchView(viewId) {
-    ['loadingBox', 'quizBox', 'resultBox'].forEach(id => { // No loginBox now
+    ['loginBox', 'loadingBox', 'quizBox', 'resultBox'].forEach(id => {
         const element = document.getElementById(id);
         if (element) {
             element.style.display = (id === viewId) ? 'block' : 'none';
@@ -417,63 +422,91 @@ function switchView(viewId) {
 }
 
 
-// ฟังก์ชันเริ่มสอบ (ไม่มีการตรวจสอบผู้ใช้แล้ว)
-async function startQuiz() {
-  // ล้างค่าผู้ใช้เก่า (ถ้ามี)
-  userName = ''; 
-  userCode = ''; 
+// --- Logic การทำงานของแบบทดสอบ ---
 
-  // แสดงหน้าโหลดเริ่มต้น
-  switchView('loadingBox');
+// 1. ฟังก์ชันพยายามล็อกอิน
+async function attemptLogin() {
+  const usernameInput = document.getElementById('usernameInput');
+  const enteredUsername = usernameInput.value.trim();
+
+  // **แก้ไข: ซ่อนข้อความแจ้งเตือนเก่าทันทีเมื่อมีการพยายามเข้าสู่ระบบใหม่**
+  const loginMessageElement = document.getElementById('loginMessage');
+  if (loginMessageElement) {
+      loginMessageElement.style.display = 'none';
+      loginMessageElement.textContent = ''; // เคลียร์ข้อความด้วย
+  }
+
+  if (!enteredUsername) {
+    showMessage('กรุณากรอกชื่อผู้ใช้', 'error', 'loginMessage');
+    return;
+  }
+  
+  switchView('loadingBox'); // แสดงหน้าโหลด
+  // showMessage('', 'info', 'loginMessage'); // ย้ายการเคลียร์ข้อความไปทำก่อนหน้าแล้ว
 
   try {
-    // โหลดข้อสอบโดยตรง
-    const questionsResponse = await fetch(`${SCRIPT_URL}?action=getQuestions`);
-    const questionsData = await questionsResponse.json();
-    
-    if (!questionsData.success) {
-      throw new Error(questionsData.message || 'ไม่สามารถโหลดข้อสอบได้');
+    const response = await fetch(`${SCRIPT_URL}?action=checkUser&username=${encodeURIComponent(enteredUsername)}`);
+    if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
     }
-    
-    if (!questionsData.data || questionsData.data.length === 0) {
-      throw new Error('ไม่มีข้อสอบในระบบ');
+    const data = await response.json();
+
+    if (data.success && data.valid) {
+      userName = data.username; // เก็บ username จริงที่ใช้ในการตรวจสอบ
+      displayUserName = data.name; // เก็บชื่อที่ใช้แสดงผล (จากช่อง D)
+      startQuiz(); // เริ่มโหลดข้อสอบหลังจากล็อกอินสำเร็จ
+    } else {
+      switchView('loginBox'); // กลับไปหน้าล็อกอิน
+      showMessage(data.message || 'ไม่สามารถเข้าสู่ระบบได้', 'error', 'loginMessage');
     }
-
-    questions = questionsData.data;
-    currentQuestion = 0; // รีเซ็ตสำหรับเริ่มต้นการสอบใหม่
-    score = 0;           // รีเซ็ตสำหรับเริ่มต้นการสอบใหม่
-    userAnswers = [];    // รีเซ็ตสำหรับเริ่มต้นการสอบใหม่
-    startTime = new Date(); // เริ่มจับเวลาสำหรับการสอบครั้งใหม่
-    
-    // เปลี่ยนไปหน้าข้อสอบหลังจากแสดง Animation โหลดครู่หนึ่ง
-    setTimeout(() => {
-      switchView('quizBox');
-      showQuestion();
-    }, 500); 
-
   } catch (error) {
-    console.error('Error starting quiz:', error);
-    showMessage(`Error: ${error.message}`, 'error', 'quizMessage'); // แสดง Error ใน quizMessage
-    switchView('quizBox'); // Display quiz box to show the error message (or implement a global error div)
-    // หากโหลดข้อสอบไม่ได้ คุณอาจต้องการแสดงข้อความ Error ที่ผู้ใช้เห็นได้บนหน้าจอ
-    // เช่น: document.body.innerHTML = `<div class="message error">${error.message}. <button onclick="resetQuiz()">ลองอีกครั้ง</button></div>`;
+    console.error('Error during login:', error);
+    switchView('loginBox'); // กลับไปหน้าล็อกอิน
+    showMessage('เกิดข้อผิดพลาดในการเชื่อมต่อ: ' + error.message, 'error', 'loginMessage');
   }
 }
 
-// ฟังก์ชันแสดงคำถามปัจจุบัน
+// 2. ฟังก์ชันเริ่มโหลดข้อสอบ (ถูกเรียกหลังจากล็อกอินสำเร็จ)
+async function startQuiz() {
+  // ไม่ต้องสลับ view ที่นี่ เพราะทำใน attemptLogin แล้ว
+  
+  // ล้างค่าสำหรับเริ่มสอบใหม่
+  questions = [];
+  currentQuestion = 0;
+  userAnswers = [];
+  
+  try {
+    const questionsResponse = await fetch(`${SCRIPT_URL}?action=getQuestions`);
+    if (!questionsResponse.ok) {
+        throw new Error(`Network response was not ok: ${questionsResponse.statusText}`);
+    }
+    const questionsData = await questionsResponse.json();
+    
+    if (!questionsData.success || !questionsData.data || questionsData.data.length === 0) {
+      throw new Error(questionsData.message || 'ไม่มีข้อสอบในระบบ');
+    }
+    
+    questions = questionsData.data;
+    startTime = new Date(); // เริ่มจับเวลาเมื่อโหลดข้อสอบสำเร็จ
+    
+    // เปลี่ยนไปหน้าข้อสอบ
+    switchView('quizBox');
+    showQuestion();
+
+  } catch (error) {
+    console.error('Error starting quiz:', error);
+    switchView('loginBox'); // กลับไปหน้าล็อกอินเพื่อให้ผู้ใช้เห็นข้อผิดพลาด
+    showMessage(`Error: ${error.message}`, 'error', 'loginMessage'); 
+  }
+}
+
+// 3. ฟังก์ชันแสดงคำถามปัจจุบัน
 function showQuestion() {
   if (currentQuestion >= questions.length) {
     showResult();
     return;
   }
   
-  // เคลียร์ข้อความแจ้งเตือนในหน้า quiz หากมี
-  const quizMessageElement = document.getElementById('quizMessage');
-  if (quizMessageElement) {
-      quizMessageElement.style.display = 'none';
-      quizMessageElement.textContent = '';
-  }
-
   const question = questions[currentQuestion];
   const progress = ((currentQuestion) / questions.length) * 100;
   
@@ -506,20 +539,22 @@ function showQuestion() {
   const backBtn = document.getElementById('backBtn');
 
   nextBtn.textContent = currentQuestion === questions.length - 1 ? 'จบการสอบ' : 'ถัดไป';
-  backBtn.disabled = currentQuestion === 0; // ปิดใช้งานปุ่มย้อนกลับเมื่ออยู่ข้อแรก
+  backBtn.disabled = currentQuestion === 0;
 }
 
-// ฟังก์ชันเลือกตัวเลือก
 function selectOption(index, element) {
-  document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+  // Remove 'selected' class from all options in the current question
+  const options = element.parentElement.querySelectorAll('.option');
+  options.forEach(opt => opt.classList.remove('selected'));
+  
+  // Add 'selected' class to the clicked option
   element.classList.add('selected');
   userAnswers[currentQuestion] = index;
 }
 
-// ฟังก์ชันไปข้อถัดไป
 function nextQuestion() {
   if (userAnswers[currentQuestion] === undefined) {
-    showMessage('กรุณาเลือกคำตอบก่อนดำเนินการต่อ', 'error', 'quizMessage'); 
+    alert('กรุณาเลือกคำตอบก่อนดำเนินการต่อ'); // **ข้อควรระวัง: ควรเปลี่ยน alert นี้เป็นข้อความบน UI**
     return;
   }
   
@@ -527,7 +562,6 @@ function nextQuestion() {
   showQuestion();
 }
 
-// ฟังก์ชันย้อนกลับไปข้อก่อนหน้า
 function previousQuestion() {
   if (currentQuestion > 0) {
     currentQuestion--;
@@ -535,35 +569,33 @@ function previousQuestion() {
   }
 }
 
-// ฟังก์ชันแสดงผลลัพธ์และเฉลย
+// 4. ฟังก์ชันแสดงผลลัพธ์และบันทึก
 async function showResult() {
   switchView('resultBox');
   
   const endTime = new Date();
   const timeSpent = Math.floor((endTime - startTime) / 1000);
   
-  // คำนวณคะแนนสำหรับแสดงผลและบันทึก
-  let correctCount = 0; 
+  let correctCount = 0;
   for (let i = 0; i < questions.length; i++) {
-      if (userAnswers[i] !== undefined && questions[i] && questions[i].correct !== undefined && userAnswers[i] === questions[i].correct) {
-          correctCount++;
-      }
+    if (userAnswers[i] !== undefined && questions[i] && questions[i].correct !== undefined && userAnswers[i] === questions[i].correct) {
+        correctCount++;
+    }
   }
-  const percentage = (questions.length > 0) ? (correctCount / questions.length) * 100 : 0; 
-  
+  const percentage = (questions.length > 0) ? (correctCount / questions.length) * 100 : 0;
+
   // แสดงผลคะแนน
   document.getElementById('scoreDisplay').innerHTML = `
     <div class="message success">
       <h3>คะแนนของคุณ: ${percentage.toFixed(1)}%</h3>
-      <p>ตอบถูก ${correctCount} ข้อ จากทั้งหมด ${questions.length} ข้อ</p>
+      <p>คุณ ${displayUserName || userName} ตอบถูก ${correctCount} ข้อ จากทั้งหมด ${questions.length} ข้อ</p>
       <p>ใช้เวลา ${Math.floor(timeSpent / 60)} นาที ${timeSpent % 60} วินาที</p>
     </div>
   `;
-  
-  // สร้างและแสดงเฉลย
+
+  // แสดงเฉลย
   const answerReviewContainer = document.getElementById('answerReview');
-  answerReviewContainer.innerHTML = '<h3 class="answer-review">เฉลยและคำอธิบาย</h3>'; 
-  
+  answerReviewContainer.innerHTML = '<h3 class="answer-review">เฉลยและคำอธิบาย</h3>';
   questions.forEach((question, index) => {
     const userAnswerIndex = userAnswers[index];
     const userAnswerText = userAnswerIndex !== undefined && question.options[userAnswerIndex] !== undefined ? question.options[userAnswerIndex] : 'ไม่ได้ตอบ';
@@ -571,13 +603,8 @@ async function showResult() {
     const isCorrect = userAnswerIndex === question.correct;
 
     const answerItemDiv = document.createElement('div');
-    answerItemDiv.className = 'answer-item'; 
-    if (isCorrect) {
-        answerItemDiv.classList.add('correct-border'); 
-    } else {
-        answerItemDiv.classList.add('incorrect-border'); 
-    }
-    
+    answerItemDiv.className = `answer-item ${isCorrect ? 'correct-border' : 'incorrect-border'}`;
+   
     answerItemDiv.innerHTML = `
       <p class="question-text">ข้อ ${index + 1}: ${question.question}</p>
       <p>คำตอบของคุณ: <span class="user-answer ${isCorrect ? 'correct' : ''}">${userAnswerText}</span></p>
@@ -590,45 +617,57 @@ async function showResult() {
   // บันทึกผลสอบ
   try {
     const resultData = {
-      userName, 
-      userCode, 
+      userName: userName,
+      userCode: '', // ไม่ได้ใช้แล้ว
       score: percentage, 
       correctAnswers: correctCount, 
       totalQuestions: questions.length,
       answers: userAnswers,
-      timeSpent,
-      ipAddress: '' 
+      timeSpent: timeSpent,
+      ipAddress: '' // ต้องดึงจากฝั่ง server-side (Apps Script) หากต้องการ
     };
     
-    await fetch(`${SCRIPT_URL}?action=saveResult`, {
+    await fetch(SCRIPT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(resultData)
+      body: JSON.stringify(resultData),
+      headers: { "Content-Type": "application/json" }
     });
-    console.log("บันทึกผลสอบสำเร็จ (หรือส่งคำขอไปยัง Apps Script แล้ว).");
+    console.log("ส่งคำขอเพื่อบันทึกผลสอบแล้ว");
     
   } catch (error) {
     console.error('เกิดข้อผิดพลาดในการบันทึกผลสอบ:', error);
-    showMessage('เกิดข้อผิดพลาดในการบันทึกผลสอบ', 'error', 'resultBox'); // Show error on result page if saving fails
+    // You might want to show this error on the result page
   }
 }
 
-// ฟังก์ชันรีเซ็ตการสอบและเริ่มใหม่
+// 5. ฟังก์ชันรีเซ็ตกลับไปหน้าล็อกอิน
 function resetQuiz() {
-    switchView('loadingBox'); // แสดงหน้าโหลด เพื่อเตรียมการสอบใหม่
-
+    // รีเซ็ตตัวแปรสถานะ
     questions = [];
     currentQuestion = 0;
-    score = 0;
+    userName = '';
+    displayUserName = '';
     userAnswers = [];
     startTime = null; 
 
-    startQuiz(); 
+    // เคลียร์ค่า input และข้อความ
+    const usernameInput = document.getElementById('usernameInput');
+    if(usernameInput) usernameInput.value = '';
+    // **แก้ไข: เคลียร์ข้อความแจ้งเตือนด้วยเมื่อกดทำใหม่/รีเซ็ต**
+    const loginMessageElement = document.getElementById('loginMessage');
+    if (loginMessageElement) {
+        loginMessageElement.style.display = 'none';
+        loginMessageElement.textContent = '';
+    }
+    
+    // กลับไปหน้าล็อกอิน
+    switchView('loginBox');
 }
 
-// Event Listener: เริ่มการสอบโดยอัตโนมัติเมื่อหน้าเว็บโหลดเสร็จ
+// Event Listener: เริ่มต้นการทำงานเมื่อหน้าเว็บโหลดเสร็จ
 document.addEventListener('DOMContentLoaded', function() {
-    startQuiz(); 
+    // เริ่มต้นโดยการแสดงหน้าล็อกอินเท่านั้น
+    switchView('loginBox');
 });
 </script>
 </body>
