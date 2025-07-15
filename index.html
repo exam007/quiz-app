@@ -8,20 +8,19 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            /* สีที่ปรับให้เข้ากับภาพที่ให้มามากขึ้น */
-            --bg-color: #f0f2f5; /* พื้นหลังโดยรวมที่สว่างและนุ่มนวล */
-            --card-bg: #ffffff; /* สีพื้นหลังของ Card */
-            --text-primary: #333333; /* สีข้อความหลัก */
-            --text-secondary: #666666; /* สีข้อความรอง */
-            --border-color: #e0e0e0; /* สีขอบอ่อนๆ */
-            --shadow-light: rgba(0, 0, 0, 0.05); /* เงาอ่อน */
-            --shadow-medium: rgba(0, 0, 0, 0.1); /* เงาปานกลาง */
-            --accent-blue: #007aff; /* สีฟ้า iOS */
-            --accent-red: #ff3b30; /* สีแดง iOS */
-            --accent-green: #34c759; /* สีเขียว iOS */
-
-            --card-radius: 16px; /* ขอบโค้งของ Card ที่ชัดเจนขึ้น */
-            --element-radius: 10px; /* ขอบโค้งสำหรับปุ่ม, input, option */
+            --ios-bg: #f2f2f7; /* iOS background color */
+            --ios-card-bg: #ffffff; /* iOS card background */
+            --ios-light-shadow: rgba(255, 255, 255, 0.9);
+            --ios-dark-shadow: rgba(174, 174, 192, 0.4); /* Softer dark shadow */
+            --ios-primary-text: #000000;
+            --ios-secondary-text: #8e8e93; /* Gray for secondary text */
+            --ios-accent-blue: #007aff; /* iOS blue */
+            --ios-red: #ff3b30; /* iOS red for errors */
+            --ios-green: #34c759; /* iOS green for success */
+            --ios-border-color: rgba(0, 0, 0, 0.08); /* Subtle border for separation */
+            --card-radius: 12px; /* Slightly smaller, more refined radius */
+            --button-radius: 10px;
+            --input-radius: 10px;
         }
 
         * {
@@ -30,47 +29,46 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-color); /* ใช้พื้นหลังใหม่ */
+            background: var(--ios-bg); /* Use iOS background */
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             padding: 20px;
-            color: var(--text-primary);
-            -webkit-font-smoothing: antialiased;
+            color: var(--ios-primary-text);
+            -webkit-font-smoothing: antialiased; /* Smoother text rendering */
             -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
-            background: var(--card-bg);
+            background: var(--ios-card-bg); /* White background for main container */
             border-radius: var(--card-radius);
-            padding: 30px 25px;
-            max-width: 450px;
+            padding: 30px 25px; /* Slightly reduced padding */
+            max-width: 450px; /* Slightly narrower for mobile feel */
             width: 100%;
-            /* เงาที่ชัดเจนขึ้นเพื่อให้ดูเป็น Card ลอยตัว */
-            box-shadow: 0 8px 25px var(--shadow-medium),
-                        0 2px 8px var(--shadow-light);
+            box-shadow: 0 4px 16px var(--ios-dark-shadow),
+                        0 1px 3px rgba(0, 0, 0, 0.1); /* iOS-like soft shadow */
             position: relative;
-            overflow: hidden;
-            border: 1px solid var(--border-color); /* ขอบบางๆ */
+            overflow: hidden; /* For rounded corners on children */
+            border: 1px solid var(--ios-border-color); /* Subtle border */
         }
 
         h1, h2 {
             text-align: center;
             margin-bottom: 25px;
-            font-weight: 700; /* Bold for titles */
-            font-size: 1.8rem; /* Larger for prominence */
-            color: var(--text-primary);
+            font-weight: 600; /* Semibold for titles */
+            font-size: 1.5rem; /* Larger for prominence */
+            color: var(--ios-primary-text);
         }
 
         h4 {
             text-align: left;
             margin-bottom: 20px;
-            font-weight: 600; /* Semibold for question text */
-            font-size: 1.15rem;
+            font-weight: 500; /* Medium for question text */
+            font-size: 1.1rem;
             line-height: 1.5;
-            color: var(--text-primary);
+            color: var(--ios-primary-text);
         }
 
         .form-group {
@@ -80,39 +78,38 @@
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-secondary);
+            font-weight: 500;
+            color: var(--ios-secondary-text); /* iOS secondary text color */
             font-size: 0.95rem;
         }
 
         input {
             width: 100%;
-            padding: 14px 18px; /* เพิ่ม padding */
-            border-radius: var(--element-radius);
-            font-size: 1.05rem;
-            border: 1px solid var(--border-color);
-            background: var(--bg-color); /* ให้ดูเป็น inset */
-            color: var(--text-primary);
-            /* เงา inset เพื่อให้ดูจมลงไป */
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.08);
+            padding: 12px 15px; /* Slightly smaller padding */
+            border-radius: var(--input-radius);
+            font-size: 1rem;
+            border: 1px solid var(--ios-border-color); /* Subtle iOS border */
+            background: var(--ios-bg); /* Match body bg for subtle inset */
+            color: var(--ios-primary-text);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08); /* Soft inset shadow */
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         input:focus {
             outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.08), 0 0 0 4px rgba(0, 122, 255, 0.2); /* เงาสีฟ้าเรืองแสง */
+            border-color: var(--ios-accent-blue); /* iOS blue focus ring */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 3px rgba(0, 122, 255, 0.2); /* Soft blue glow */
         }
 
         input::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.8;
+            color: var(--ios-secondary-text);
+            opacity: 0.7;
         }
 
         .button-group {
             display: flex;
-            gap: 12px; /* เพิ่มระยะห่างระหว่างปุ่ม */
-            margin-top: 25px; /* เพิ่ม margin-top */
+            gap: 10px;
+            margin-top: 20px;
             width: 100%;
             flex-wrap: wrap;
         }
@@ -124,110 +121,104 @@
         }
 
         button {
-            padding: 14px 20px; /* เพิ่ม padding */
-            border-radius: var(--element-radius);
-            font-size: 1.05rem;
+            padding: 12px 18px; /* Refined padding */
+            border-radius: var(--button-radius);
+            font-size: 1rem;
             border: none;
-            background: var(--accent-blue);
+            background: var(--ios-accent-blue); /* iOS blue for primary actions */
             color: white;
-            font-weight: 600;
+            font-weight: 600; /* Semibold for button text */
             cursor: pointer;
-            /* เงาที่ชัดเจนขึ้นสำหรับปุ่ม */
-            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.35);
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3); /* Soft blue shadow */
             transition: all 0.2s ease;
-            -webkit-appearance: none;
+            -webkit-appearance: none; /* Remove default button styling */
         }
 
         button:hover:not(:disabled) {
-            background-color: #006ddb; /* Darker blue on hover */
-            box-shadow: 0 6px 20px rgba(0, 122, 255, 0.45);
-            transform: translateY(-2px); /* ยกตัวขึ้นเล็กน้อย */
+            background-color: #005bb5; /* Darker blue on hover */
+            box-shadow: 0 3px 10px rgba(0, 122, 255, 0.4);
+            transform: translateY(-1px); /* Subtle lift */
         }
 
         button:active:not(:disabled) {
-            transform: translateY(0);
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
-            background-color: #005aab;
+            transform: translateY(0); /* Press effect */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+            background-color: #004a99;
         }
 
         button:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
-            background-color: #a7d9ff; /* สีอ่อนลงเมื่อ disabled */
         }
 
         /* Specific styles for secondary buttons (like "Back" or "Cancel") */
         .button-group #backBtn, #cancelSubmit {
-            background: var(--card-bg); /* สีพื้นหลัง Card */
-            color: var(--accent-blue);
-            box-shadow: 0 3px 10px var(--shadow-light); /* เงาอ่อนลง */
-            border: 1px solid var(--border-color);
+            background: var(--ios-bg); /* Match body bg */
+            color: var(--ios-accent-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Lighter shadow */
+            border: 1px solid var(--ios-border-color);
         }
 
         .button-group #backBtn:hover:not(:disabled), #cancelSubmit:hover {
-            background-color: #f5f5f5; /* Lighter hover for secondary */
-            box-shadow: 0 4px 12px var(--shadow-medium);
+            background-color: #e5e5ea; /* Lighter hover for secondary */
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
             color: #005bb5;
         }
 
         .button-group #backBtn:active:not(:disabled), #cancelSubmit:active {
-            background-color: #e8e8e8;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+            background-color: #d1d1d6;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .option {
-            background: var(--card-bg);
-            padding: 16px 22px; /* เพิ่ม padding */
-            margin: 12px 0; /* เพิ่ม margin */
-            border-radius: var(--element-radius);
-            border: 1px solid var(--border-color);
+            background: var(--ios-card-bg);
+            padding: 14px 20px;
+            margin: 10px 0; /* Slightly less margin */
+            border-radius: var(--button-radius);
+            border: 1px solid var(--ios-border-color); /* Subtle border */
             cursor: pointer;
-            /* เงาที่ชัดเจนขึ้น */
-            box-shadow: 0 2px 8px var(--shadow-light);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); /* Very soft shadow */
             transition: all 0.2s ease;
             user-select: none;
-            color: var(--text-primary);
+            color: var(--ios-primary-text);
             line-height: 1.4;
-            font-size: 1rem;
-            font-weight: 500;
         }
 
         .option:hover {
-            border-color: var(--accent-blue);
-            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.15);
-            transform: translateY(-1px);
+            border-color: var(--ios-accent-blue); /* Highlight border on hover */
+            box-shadow: 0 2px 6px rgba(0, 122, 255, 0.1);
         }
 
         .option.selected {
-            background: var(--accent-blue);
+            background: var(--ios-accent-blue);
             color: white;
-            border-color: var(--accent-blue);
-            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.4);
-            transform: translateY(-2px);
+            border-color: var(--ios-accent-blue);
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+            transform: translateY(-1px); /* Subtle lift on selection */
         }
 
         .message {
             text-align: center;
-            padding: 15px; /* เพิ่ม padding */
-            border-radius: var(--element-radius);
-            margin: 18px 0; /* เพิ่ม margin */
+            padding: 12px;
+            border-radius: var(--button-radius);
+            margin: 15px 0;
             font-weight: 500;
-            border: 1px solid transparent;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* เงาสำหรับ message */
+            border: 1px solid transparent; /* Default transparent border */
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); /* Soft shadow */
         }
 
         .message.error {
-            background: #ffe6e6; /* Light red background */
-            color: var(--accent-red);
-            border-color: #ffb3b3; /* Soft red border */
+            background: #fff0f0; /* Light red background */
+            color: var(--ios-red);
+            border-color: #ffcccc; /* Soft red border */
         }
 
         .message.success {
-            background: #e6ffe6; /* Light green background */
-            color: var(--accent-green);
-            border-color: #b3ffb3; /* Soft green border */
+            background: #f0fff0; /* Light green background */
+            color: var(--ios-green);
+            border-color: #ccffcc; /* Soft green border */
         }
 
         .question-box, .result-box {
@@ -236,45 +227,44 @@
 
         .progress-bar {
             width: 100%;
-            height: 8px; /* หนาขึ้นเล็กน้อย */
-            background: var(--border-color);
-            border-radius: 4px;
-            margin-bottom: 25px;
+            height: 6px; /* Thinner progress bar */
+            background: var(--ios-border-color);
+            border-radius: 3px;
+            margin-bottom: 20px;
             overflow: hidden;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inset shadow */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08); /* Soft inset */
         }
 
         .progress-fill {
             height: 100%;
-            background: var(--accent-blue);
-            border-radius: 4px;
+            background: var(--ios-accent-blue); /* Solid iOS blue */
+            border-radius: 3px;
             transition: width 0.3s ease;
-            box-shadow: 0 0 8px rgba(0, 122, 255, 0.4); /* เงาสีฟ้าที่ปลาย */
         }
 
         .question-counter {
             text-align: center;
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+            margin-bottom: 15px;
+            color: var(--ios-secondary-text);
+            font-size: 0.9rem;
             font-weight: 500;
         }
 
         .loading {
             text-align: center;
-            padding: 40px 20px;
-            color: var(--text-secondary);
-            font-size: 1.1rem;
+            padding: 30px 20px; /* More padding */
+            color: var(--ios-secondary-text);
+            font-size: 1rem;
         }
 
         .spinner {
-            border: 4px solid rgba(0, 122, 255, 0.2);
+            border: 3px solid rgba(0, 122, 255, 0.2); /* Lighter blue */
             border-radius: 50%;
-            border-top: 4px solid var(--accent-blue);
-            width: 40px;
-            height: 40px;
+            border-top: 3px solid var(--ios-accent-blue);
+            width: 30px;
+            height: 30px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 25px;
+            margin: 0 auto 20px; /* More space */
         }
 
         @keyframes spin {
@@ -285,80 +275,86 @@
         /* Styles for the answer review section */
         .answer-review {
             margin-top: 30px;
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid var(--ios-border-color); /* Subtle separator */
             padding-top: 20px;
         }
 
         .answer-review h3 {
             text-align: center;
-            margin-bottom: 25px;
-            font-weight: 700;
-            color: var(--text-primary);
-            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--ios-primary-text);
+            font-size: 1.3rem;
         }
 
         .answer-item {
-            background: var(--card-bg);
-            border-radius: var(--element-radius);
+            background: var(--ios-card-bg);
+            border-radius: var(--card-radius);
             padding: 20px;
-            margin-bottom: 18px;
-            box-shadow: 0 2px 10px var(--shadow-light);
-            border: 1px solid var(--border-color);
+            margin-bottom: 15px; /* Less margin */
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08); /* Soft shadow */
+            border: 1px solid var(--ios-border-color);
             transition: all 0.2s ease;
         }
 
         .answer-item.correct-border {
-            border-color: var(--accent-green);
-            box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.2), 0 2px 10px var(--shadow-light);
+            border-color: var(--ios-green);
+            box-shadow: 0 0 0 2px rgba(52, 199, 89, 0.3), 0 1px 4px rgba(0,0,0,0.08);
         }
 
         .answer-item.incorrect-border {
-            border-color: var(--accent-red);
-            box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.2), 0 2px 10px var(--shadow-light);
+            border-color: var(--ios-red);
+            box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.3), 0 1px 4px rgba(0,0,0,0.08);
         }
 
         .answer-item p {
-            margin-bottom: 8px;
-            line-height: 1.5;
+            margin-bottom: 6px; /* Less space */
+            line-height: 1.4;
         }
 
         .answer-item strong {
-            color: var(--text-primary);
+            color: var(--ios-primary-text);
         }
 
         .answer-item .question-text {
-            font-weight: 600;
+            font-weight: 600; /* Semibold for question text */
             margin-bottom: 10px;
-            color: var(--text-primary);
-            font-size: 1.1rem;
+            color: var(--ios-primary-text);
+            font-size: 1.05rem;
         }
 
         .answer-item .user-answer {
-            color: var(--accent-red);
+            color: var(--ios-red);
             font-weight: 500;
         }
         
         .answer-item .user-answer.correct {
-            color: var(--accent-green);
+            color: var(--ios-green);
         }
 
         .answer-item .correct-answer {
-            color: var(--accent-blue);
+            color: var(--ios-accent-blue);
             font-weight: 500;
         }
         
         .answer-item .explanation {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px dashed var(--border-color);
-            font-size: 0.9em;
-            color: var(--text-secondary);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--ios-border-color); /* Lighter dashed line */
+            font-size: 0.88em;
+            color: var(--ios-secondary-text);
         }
 
         /* --- New/Modified Styles for Login Page Layout --- */
         #loginBox button {
             width: 100%;
-            margin-top: 30px;
+            margin-top: 25px; /* More space */
+        }
+
+        .message {
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); /* Soft shadow */
         }
 
         /* Custom modal styles (iOS-like) */
@@ -368,91 +364,84 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Overlay ที่ทึบขึ้นเล็กน้อย */
+            background-color: rgba(0, 0, 0, 0.4); /* Slightly lighter overlay */
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(8px); /* Frosted glass effect ที่ชัดขึ้น */
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(5px);
         }
         .modal-content {
-            background: var(--card-bg);
-            padding: 2.2rem; /* เพิ่ม padding */
+            background: var(--ios-card-bg);
+            padding: 2rem;
             border-radius: var(--card-radius);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25); /* เงาที่ชัดเจนขึ้นสำหรับ modal */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* More pronounced shadow for modal */
             text-align: center;
-            max-width: 380px; /* ขยาย modal เล็กน้อย */
+            max-width: 350px; /* Tighter modal */
             width: 90%;
-            color: var(--text-primary);
-            border: 1px solid rgba(0,0,0,0.08); /* Light border */
+            color: var(--ios-primary-text);
+            border: 1px solid rgba(0,0,0,0.05); /* Light border */
         }
         .modal-content button {
             width: auto;
             flex-grow: 0;
-            margin: 0 10px; /* เพิ่มระยะห่างระหว่าง modal buttons */
-            padding: 12px 25px; /* เพิ่ม padding */
-            border-radius: 10px;
-            font-weight: 600; /* Semibold */
+            margin: 0 8px; /* Less space between modal buttons */
+            padding: 10px 20px;
+            border-radius: 8px; /* Slightly smaller radius for modal buttons */
+            font-weight: 500; /* Medium weight */
             box-shadow: none; /* Modal buttons have flat appearance initially */
             transform: none; /* No lift */
         }
         
         #confirmSubmit {
-            background-color: var(--accent-red);
+            background-color: var(--ios-red); /* iOS red for destructive action */
             color: white;
-            box-shadow: 0 3px 10px rgba(255, 59, 48, 0.3);
         }
         #confirmSubmit:hover {
             background-color: #cc2b22;
-            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
         }
         #confirmSubmit:active {
             background-color: #b2251d;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         #cancelSubmit {
-            background-color: var(--bg-color); /* ใช้สีพื้นหลังโดยรวม */
-            color: var(--accent-blue);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 3px 10px var(--shadow-light);
+            background-color: var(--ios-accent-blue); /* iOS blue for primary action in modal */
+            color: white;
         }
         #cancelSubmit:hover {
-            background-color: #e5e5ea;
-            box-shadow: 0 4px 12px var(--shadow-medium);
+            background-color: #005bb5;
         }
         #cancelSubmit:active {
-            background-color: #d1d1d6;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            background-color: #004a99;
         }
 
         /* Close button (X) */
         #closeButton {
             position: absolute;
-            top: 18px; /* Slightly more inset */
-            right: 18px;
-            background: var(--bg-color);
+            top: 15px; /* Slightly more inset */
+            right: 15px;
+            background: var(--ios-bg); /* Use iOS background color */
             border-radius: 50%;
-            width: 36px; /* Larger touch target */
-            height: 36px;
+            width: 34px; /* Larger touch target */
+            height: 34px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.6rem; /* Larger X */
-            color: var(--text-secondary);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); /* Soft shadow */
+            font-size: 1.5rem; /* Larger X */
+            color: var(--ios-secondary-text);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
             transition: all 0.2s ease;
             cursor: pointer;
             border: none;
-            padding: 0;
-            line-height: 1;
+            padding: 0; /* Remove default padding */
+            line-height: 1; /* Center the X */
         }
 
         #closeButton:hover {
             background-color: #e5e5ea;
-            color: var(--text-primary);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+            color: var(--ios-primary-text);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
         #closeButton:active {
             background-color: #d1d1d6;
@@ -464,40 +453,40 @@
             .container {
                 padding: 25px 20px;
                 margin: 15px;
-                border-radius: 12px;
+                border-radius: 10px; /* Slightly smaller on small screens */
             }
             
             h2 {
-                font-size: 1.6rem;
+                font-size: 1.3rem;
                 margin-bottom: 20px;
             }
 
             input, button, .option {
-                padding: 12px 16px;
-                font-size: 0.95rem;
+                padding: 10px 14px;
+                font-size: 0.9rem;
             }
 
             .option {
-                margin: 10px 0;
+                margin: 8px 0;
             }
 
             .button-group button {
-                width: 100%;
+                width: 100%; /* Stack buttons on very small screens */
                 flex-grow: unset;
             }
 
             .modal-content {
-                padding: 1.8rem;
+                padding: 1.5rem;
             }
             .modal-content button {
-                margin: 0 8px;
+                margin: 0 5px;
             }
             #closeButton {
-                top: 12px;
-                right: 12px;
-                width: 32px;
-                height: 32px;
-                font-size: 1.4rem;
+                top: 10px;
+                right: 10px;
+                width: 30px;
+                height: 30px;
+                font-size: 1.3rem;
             }
         }
     </style>
