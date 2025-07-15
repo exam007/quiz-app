@@ -47,19 +47,18 @@
         }
 
         .container {
-            background: var(--card-bg);
-              width:300px; 
-            border-radius: var(--card-radius);
-            padding: 40px; /* เพิ่ม padding ให้ดูโปร่งขึ้น */
-            max-width: 500px; /* ขนาดสูงสุดของกล่องหลัก (ใกล้เคียง A4 ในแนวตั้งบนเดสก์ท็อป) */
-            width: 90%;
-            /* เงา Soft UI สำหรับ Card หลัก */
-            box-shadow: 10px 10px 30px var(--neumorphic-dark-shadow), /* เงาด้านขวา-ล่าง */
-                        -10px -10px 30px var(--neumorphic-light-shadow); /* เงาด้านซ้าย-บน (light) */
-            position: relative;
-            overflow: hidden;
-            border: none; /* ไม่มีขอบแข็ง */
-        }
+    background: var(--card-bg);
+    border-radius: var(--card-radius);
+    padding: 40px;
+    width: 100%;
+    max-width: 794px;          /* ใกล้เคียง A4 แนวตั้ง */
+    max-height: 100vh;         /* ไม่ให้สูงเกินหน้าจอ */
+    overflow-y: auto;          /* ให้เลื่อนถ้าเนื้อหาเกิน */
+    box-shadow: 10px 10px 30px var(--neumorphic-dark-shadow),
+                -10px -10px 30px var(--neumorphic-light-shadow);
+    position: relative;
+    border: none;
+}
 
         .app-title {
             text-align: center;
@@ -586,7 +585,7 @@
         <p class="app-title">แบบทดสอบ ภาค ก. ท้องถิ่น กฎหมาย 200 ข้อ</p>
     
         <div class="form-group">
-            <input type="text" id="usernameInput" placeholder="ชื่อผู้ใช้งาน"
+            <input type="text" id="usernameInput" placeholder="ชื่อผู้ใช้าน"
             class="w-full text-xl px-6 py-4 rounded-full border border-gray-300 shadow-sm text-center placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <button onclick="attemptLogin()"
