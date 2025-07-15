@@ -47,18 +47,18 @@
         }
 
         .container {
-    background: var(--card-bg);
-    border-radius: var(--card-radius);
-    padding: 40px;
-    width: 100%;
-    max-width: 794px;          /* ใกล้เคียง A4 แนวตั้ง */
-    max-height: 100vh;         /* ไม่ให้สูงเกินหน้าจอ */
-    overflow-y: auto;          /* ให้เลื่อนถ้าเนื้อหาเกิน */
-    box-shadow: 10px 10px 30px var(--neumorphic-dark-shadow),
-                -10px -10px 30px var(--neumorphic-light-shadow);
-    position: relative;
-    border: none;
-}
+            background: var(--card-bg);
+            border-radius: var(--card-radius);
+            padding: 40px; /* เพิ่ม padding ให้ดูโปร่งขึ้น */
+            max-width: 500px; /* ขนาดสูงสุดของกล่องหลัก (ใกล้เคียง A4 ในแนวตั้งบนเดสก์ท็อป) */
+            width: 100%;
+            /* เงา Soft UI สำหรับ Card หลัก */
+            box-shadow: 10px 10px 30px var(--neumorphic-dark-shadow), /* เงาด้านขวา-ล่าง */
+                        -10px -10px 30px var(--neumorphic-light-shadow); /* เงาด้านซ้าย-บน (light) */
+            position: relative;
+            overflow: hidden;
+            border: none; /* ไม่มีขอบแข็ง */
+        }
 
         .app-title {
             text-align: center;
@@ -579,13 +579,13 @@
     </style>
 </head>
 <body>
-<div class="container">
+<div class="w-full max-w-[90vw] sm:max-w-[600px] md:max-w-[794px] p-6 md:p-10 bg-white rounded-2xl shadow-xl">
     <!-- หน้าล็อกอิน (แสดงเป็นหน้าแรก) -->
     <div id="loginBox" style="display:block;">
         <p class="app-title">แบบทดสอบ ภาค ก. ท้องถิ่น กฎหมาย 200 ข้อ</p>
     
         <div class="form-group">
-            <input type="text" id="usernameInput" placeholder="ชื่อผู้ใช้าน"
+            <input type="text" id="usernameInput" placeholder="ชื่อผู้ใช้"
             class="w-full text-xl px-6 py-4 rounded-full border border-gray-300 shadow-sm text-center placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
         <button onclick="attemptLogin()"
@@ -617,9 +617,9 @@
         <div class="button-group">
             <!-- สลับลำดับของปุ่มเพื่อให้ "ย้อนกลับ" อยู่ซ้ายและ "ถัดไป" อยู่ขวา -->
             <button id="backBtn" onclick="previousQuestion()" 
-            class="text-xl px-8 py-4 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 text-white font-semibold shadow-md hover:opacity-90">ย้อนกลับ</button>
+             class="text-base px-4 py-2 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 text-white font-semibold shadow-md hover:opacity-90 sm:text-xl sm:px-8 sm:py-4">ย้อนกลับ</button>
             <button id="nextBtn" onclick="nextQuestion()"
-             class="text-xl px-8 py-4 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 text-white font-semibold shadow-md hover:opacity-90">ถัดไป</button>
+             class="text-base px-4 py-2 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 text-white font-semibold shadow-md hover:opacity-90 sm:text-xl sm:px-8 sm:py-4">ถัดไป</button>
         </div>
     </div>
 
