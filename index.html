@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แบบทดสอบ ภาค ก. ท้องถิ่น กฎหมาย 200 ข้อ</title>
-    <!-- Inter Font for modern, clean typography -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN (for utilities and modal, though mostly custom CSS) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -16,7 +14,7 @@
             --text-primary: #333; /* สีข้อความหลักที่เข้มขึ้นเล็กน้อย */
             --text-secondary: #6b6b6b; /* สีข้อความรอง */
             
-            /* Shadows for Soft UI elements */
+            /* Shadows สำหรับองค์ประกอบ Soft UI */
             --neumorphic-light-shadow: #ffffff; /* เงาสว่างสำหรับด้านบน/ซ้าย */
             --neumorphic-dark-shadow: #a7a9af; /* เงาเข้มสำหรับด้านล่าง/ขวา */
 
@@ -50,7 +48,7 @@
             background: var(--card-bg);
             border-radius: var(--card-radius);
             padding: 40px; /* เพิ่ม padding ให้ดูโปร่งขึ้น */
-            max-width: 500px;
+            max-width: 500px; /* ขนาดสูงสุดของกล่องหลัก (ใกล้เคียง A4 ในแนวตั้งบนเดสก์ท็อป) */
             width: 100%;
             /* เงา Soft UI สำหรับ Card หลัก */
             box-shadow: 10px 10px 30px var(--neumorphic-dark-shadow), /* เงาด้านขวา-ล่าง */
@@ -157,7 +155,7 @@
         }
 
         button:hover:not(:disabled) {
-            background-color: #006ddb; /* Darker blue on hover */
+            background-color: #006ddb; /* สีน้ำเงินเข้มขึ้นเมื่อ hover */
             box-shadow: 8px 8px 15px var(--neumorphic-dark-shadow), 
                         -8px -8px 15px var(--neumorphic-light-shadow);
             transform: translateY(-2px); /* ยกตัวขึ้นเล็กน้อย */
@@ -189,7 +187,7 @@
         }
 
         .button-group #backBtn:hover:not(:disabled), #cancelSubmit:hover {
-            background-color: #ebf0f5; /* Lighter hover for secondary */
+            background-color: #ebf0f5; /* Lighter hover สำหรับปุ่มรอง */
             box-shadow: 8px 8px 15px var(--neumorphic-dark-shadow), 
                         -8px -8px 15px var(--neumorphic-light-shadow);
             color: var(--text-primary);
@@ -317,7 +315,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Styles for the answer review section */
+        /* Styles สำหรับส่วนสรุปคำตอบ */
         .answer-review {
             margin-top: 40px;
             border-top: 1px dashed rgba(0,0,0,0.1); /* เส้นประแบ่งส่วน */
@@ -391,7 +389,7 @@
             color: var(--text-secondary);
         }
 
-        /* Custom Confirmation Modal */
+        /* Custom Confirmation Modal (กล่องโต้ตอบยืนยัน) */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -426,7 +424,7 @@
             font-weight: 600;
             box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
                         -6px -6px 12px var(--neumorphic-light-shadow); /* เงา Soft UI */
-            transform: none; /* No lift initially for modal buttons */
+            transform: none; /* ไม่มี lift เริ่มต้นสำหรับปุ่มในโมดอล */
         }
         
         #confirmSubmit {
@@ -464,22 +462,22 @@
                         inset -4px -4px 8px var(--neumorphic-light-shadow);
         }
 
-        /* Close button (X) */
+        /* ปุ่มปิด (X) */
         #closeButton {
             position: absolute;
             top: 22px;
             right: 22px;
             background: var(--bg-color);
             border-radius: 50%;
-            width: 48px; /* Larger */
-            height: 48px; /* Larger */
+            width: 48px; /* ขนาดใหญ่ขึ้น */
+            height: 48px; /* ขนาดใหญ่ขึ้น */
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 2.2rem; /* Larger X */
+            font-size: 2.2rem; /* ขนาด X ใหญ่ขึ้น */
             color: var(--text-secondary);
             box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
-                        -6px -6px 12px var(--neumorphic-light-shadow); /* Soft UI shadow */
+                        -6px -6px 12px var(--neumorphic-light-shadow); /* เงา Soft UI */
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
@@ -588,10 +586,8 @@
 </head>
 <body>
 <div class="container">
-    <!-- หน้าล็อกอิน (แสดงเป็นหน้าแรก) -->
     <div id="loginBox" style="display:block;">
-        <p class="app-title">Quiz App</p> <!-- เพิ่มข้อความ "Quiz App" -->
-        <h2>เข้าสู่ระบบ</h2>
+        <p class="app-title">Quiz App</p> <h2>เข้าสู่ระบบ</h2>
         <div class="form-group">
             <label for="usernameInput">ชื่อผู้ใช้:</label>
             <input type="text" id="usernameInput" placeholder="กรอกชื่อผู้ใช้ของคุณ">
@@ -600,15 +596,12 @@
         <div id="loginMessage" class="message" style="display:none;"></div>
     </div>
 
-    <!-- หน้าโหลด (ซ่อนไว้ตอนเริ่มต้น) -->
     <div id="loadingBox" class="loading" style="display:none;">
         <div class="spinner"></div>
         <p>กำลังโหลดข้อสอบ...</p>
     </div>
 
-    <!-- หน้าสอบ (ซ่อนไว้ตอนเริ่มต้น) -->
     <div id="quizBox" class="question-box" style="display:none;">
-        <!-- Close button (X) for early submission -->
         <button id="closeButton" class="">
             &times;
         </button>
@@ -627,7 +620,6 @@
         </div>
     </div>
 
-    <!-- หน้าผลลัพธ์ (ซ่อนไว้ตอนเริ่มต้น) -->
     <div id="resultBox" class="result-box" style="display:none;">
         <h2>ผลลัพธ์การสอบ</h2>
         <div id="scoreDisplay"></div>
@@ -636,7 +628,6 @@
     </div>
 </div>
 
-<!-- Custom Confirmation Modal -->
 <div id="confirmationModal" class="modal-overlay hidden">
     <div class="modal-content">
         <p class="text-xl font-semibold mb-4">ยืนยันการส่งคำตอบ</p>
@@ -671,7 +662,7 @@ function showMessage(text, type = 'error', targetElementId = 'loginMessage') {
         messageElement.className = `message ${type}`;
         messageElement.style.display = 'block';
     } else {
-        console.error(`Target element for message not found: ${targetElementId}`);
+        console.error(`ไม่พบ element เป้าหมายสำหรับข้อความ: ${targetElementId}`);
     }
 }
 
@@ -710,7 +701,7 @@ async function attemptLogin() {
     try {
         const response = await fetch(`${SCRIPT_URL}?action=checkUser&username=${encodeURIComponent(enteredUsername)}`);
         if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText}`);
+            throw new Error(`การตอบสนองของเครือข่ายไม่ถูกต้อง: ${response.statusText}`);
         }
         const data = await response.json();
 
@@ -725,7 +716,7 @@ async function attemptLogin() {
             showMessage(data.message || 'ไม่สามารถเข้าสู่ระบบได้', 'error', 'loginMessage');
         }
     } catch (error) {
-        console.error('Error during login:', error);
+        console.error('เกิดข้อผิดพลาดระหว่างล็อกอิน:', error);
         switchView('loginBox'); // กลับไปหน้าล็อกอิน
         showMessage('เกิดข้อผิดพลาดในการเชื่อมต่อ: ' + error.message, 'error', 'loginMessage');
     }
@@ -740,7 +731,7 @@ async function startQuiz() {
     try {
         const questionsResponse = await fetch(`${SCRIPT_URL}?action=getQuestions`);
         if (!questionsResponse.ok) {
-            throw new Error(`Network response was not ok: ${questionsResponse.statusText}`);
+            throw new Error(`การตอบสนองของเครือข่ายไม่ถูกต้อง: ${questionsResponse.statusText}`);
         }
         const questionsData = await questionsResponse.json();
         
@@ -755,9 +746,9 @@ async function startQuiz() {
         switchView('quizBox');
         showQuestion();
     } catch (error) {
-        console.error('Error starting quiz:', error);
+        console.error('เกิดข้อผิดพลาดในการเริ่มทำข้อสอบ:', error);
         switchView('loginBox'); // กลับไปหน้าล็อกอินเพื่อให้ผู้ใช้เห็นข้อผิดพลาด
-        showMessage(`Error: ${error.message}`, 'error', 'loginMessage');
+        showMessage(`ข้อผิดพลาด: ${error.message}`, 'error', 'loginMessage');
     }
 }
 
@@ -765,7 +756,7 @@ async function startQuiz() {
 function showQuestion() {
     if (currentQuestion >= questions.length) {
         showResult();
-        // If all questions are done, show results
+        // หากทำข้อสอบครบทุกข้อแล้ว ให้แสดงผลลัพธ์
         return;
     }
     
@@ -788,7 +779,7 @@ function showQuestion() {
             optionDiv.onclick = () => selectOption(index, optionDiv);
             optionsContainer.appendChild(optionDiv);
 
-            // Restore selected option visual if user came back to this question
+            // กู้คืนสถานะตัวเลือกที่เลือกไว้หากผู้ใช้ย้อนกลับมาที่คำถามนี้
             if (userAnswers[currentQuestion] === index) {
                 optionDiv.classList.add('selected');
             }
@@ -802,18 +793,18 @@ function showQuestion() {
 }
 
 function selectOption(index, element) {
-    // Remove 'selected' class from all options in the current question
+    // ลบคลาส 'selected' ออกจากตัวเลือกทั้งหมดในคำถามปัจจุบัน
     const options = element.parentElement.querySelectorAll('.option');
     options.forEach(opt => opt.classList.remove('selected'));
     
-    // Add 'selected' class to the clicked option
+    // เพิ่มคลาส 'selected' ให้กับตัวเลือกที่คลิก
     element.classList.add('selected');
     userAnswers[currentQuestion] = index;
 }
 
 function nextQuestion() {
     if (userAnswers[currentQuestion] === undefined) {
-        showMessage('กรุณาเลือกคำตอบก่อนดำเนินการต่อ', 'error', 'questionCounter'); // Use showMessage instead of alert
+        showMessage('กรุณาเลือกคำตอบก่อนดำเนินการต่อ', 'error', 'questionCounter'); // ใช้ showMessage แทน alert
         return;
     }
     
@@ -877,10 +868,10 @@ async function showResult() {
     console.log("การบันทึกผลสอบถูกปิดการใช้งาน");
 }
 
-// Function to handle early quiz submission
+// Function to handle early quiz submission (ฟังก์ชันสำหรับจัดการการส่งข้อสอบก่อนเวลา)
 function submitQuizEarly() {
-    console.log("Attempting to submit quiz early...");
-    // Directly call showResult to calculate score, display results, and show results.
+    console.log("พยายามส่งข้อสอบก่อนเวลา...");
+    // เรียก showResult โดยตรงเพื่อคำนวณคะแนน แสดงผลลัพธ์
     showResult();
 }
 
@@ -908,29 +899,29 @@ function resetQuiz() {
     switchView('loginBox');
 }
 
-// Event Listeners for the new close button and modal
+// Event Listeners สำหรับปุ่มปิดและโมดอลใหม่
 const closeButton = document.getElementById('closeButton');
 const confirmationModal = document.getElementById('confirmationModal');
 const confirmSubmitButton = document.getElementById('confirmSubmit');
 const cancelSubmitButton = document.getElementById('cancelSubmit');
-// Function to show the confirmation modal
+// ฟังก์ชันสำหรับแสดงโมดอลยืนยัน
 function showConfirmationModal() {
     confirmationModal.classList.remove('hidden');
 }
 
-// Function to hide the confirmation modal
+// ฟังก์ชันสำหรับซ่อนโมดอลยืนยัน
 function hideConfirmationModal() {
     confirmationModal.classList.add('hidden');
 }
 
-// Event listener for the close button
+// Event listener สำหรับปุ่มปิด (X)
 closeButton.addEventListener('click', showConfirmationModal);
-// Event listener for the "ส่งคำตอบ" (Submit) button in the modal
+// Event listener สำหรับปุ่ม "ส่งคำตอบ" ในโมดอล
 confirmSubmitButton.addEventListener('click', () => {
     hideConfirmationModal();
-    submitQuizEarly(); // Call the function to submit the quiz results
+    submitQuizEarly(); // เรียกฟังก์ชันเพื่อส่งผลการสอบ
 });
-// Event listener for the "ยกเลิก" (Cancel) button in the modal
+// Event listener สำหรับปุ่ม "ยกเลิก" ในโมดอล
 cancelSubmitButton.addEventListener('click', hideConfirmationModal);
 // Event Listener: เริ่มต้นการทำงานเมื่อหน้าเว็บโหลดเสร็จ
 document.addEventListener('DOMContentLoaded', function() {
