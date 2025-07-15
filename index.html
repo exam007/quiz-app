@@ -1,157 +1,872 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>เข้าสู่ระบบ</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    :root {
-      --card-bg: #ffffff;
-      --bg: #f9f9f9;
-      --border: #e4e4e4;
-      --blue-light: #67bdfc;
-      --blue-deep: #4facfe;
-      --text: #333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบทดสอบ ภาค ก. ท้องถิ่น กฎหมาย 200 ข้อ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --ios-bg: #f2f2f7; /* iOS background color */
+            --ios-card-bg: #ffffff; /* iOS card background */
+            --ios-light-shadow: rgba(255, 255, 255, 0.9);
+            --ios-dark-shadow: rgba(174, 174, 192, 0.4); /* Softer dark shadow */
+            --ios-primary-text: #000000;
+            --ios-secondary-text: #8e8e93; /* Gray for secondary text */
+            --ios-accent-blue: #007aff; /* iOS blue */
+            --ios-red: #ff3b30; /* iOS red for errors */
+            --ios-green: #34c759; /* iOS green for success */
+            --ios-border-color: rgba(0, 0, 0, 0.08); /* Subtle border for separation */
+            --card-radius: 12px; /* Slightly smaller, more refined radius */
+            --button-radius: 10px;
+            --input-radius: 10px;
+        }
 
-    body {
-      background: var(--bg);
-      font-family: 'Inter', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      padding: 20px;
-      color: var(--text);
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .container {
-      background: var(--card-bg);
-      padding: 40px 30px;
-      border-radius: 24px;
-      max-width: 400px;
-      width: 100%;
-      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.06);
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--ios-bg); /* Use iOS background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: var(--ios-primary-text);
+            -webkit-font-smoothing: antialiased; /* Smoother text rendering */
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-    input {
-      width: 100%;
-      padding: 16px 20px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      font-size: 1.05rem;
-      background: var(--card-bg);
-      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-      text-align: center;
-    }
+        .container {
+            background: var(--ios-card-bg); /* White background for main container */
+            border-radius: var(--card-radius);
+            padding: 30px 25px; /* Slightly reduced padding */
+            max-width: 450px; /* Slightly narrower for mobile feel */
+            width: 100%;
+            box-shadow: 0 4px 16px var(--ios-dark-shadow),
+                        0 1px 3px rgba(0, 0, 0, 0.1); /* iOS-like soft shadow */
+            position: relative;
+            overflow: hidden; /* For rounded corners on children */
+            border: 1px solid var(--ios-border-color); /* Subtle border */
+        }
 
-    input::placeholder {
-      color: #999;
-      font-weight: 500;
-    }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600; /* Semibold for titles */
+            font-size: 1.5rem; /* Larger for prominence */
+            color: var(--ios-primary-text);
+        }
 
-    input:focus {
-      outline: none;
-      border-color: var(--blue-deep);
-      box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
-    }
+        h4 {
+            text-align: left;
+            margin-bottom: 20px;
+            font-weight: 500; /* Medium for question text */
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: var(--ios-primary-text);
+        }
 
-    .login-button {
-      margin-top: 24px;
-      width: 100%;
-      padding: 16px 20px;
-      border-radius: 999px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: white;
-      background: linear-gradient(to right, var(--blue-light), var(--blue-deep));
-      border: none;
-      cursor: pointer;
-      transition: 0.3s ease;
-      box-shadow: 0 4px 14px rgba(79, 172, 254, 0.4);
-    }
+        .form-group {
+            margin-bottom: 20px;
+        }
 
-    .login-button:hover {
-      opacity: 0.95;
-      box-shadow: 0 6px 20px rgba(79, 172, 254, 0.5);
-    }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--ios-secondary-text); /* iOS secondary text color */
+            font-size: 0.95rem;
+        }
 
-    .message {
-      display: none;
-      margin-top: 20px;
-      text-align: center;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-weight: 500;
-      font-size: 1rem;
-    }
+        input {
+            width: 100%;
+            padding: 12px 15px; /* Slightly smaller padding */
+            border-radius: var(--input-radius);
+            font-size: 1rem;
+            border: 1px solid var(--ios-border-color); /* Subtle iOS border */
+            background: var(--ios-bg); /* Match body bg for subtle inset */
+            color: var(--ios-primary-text);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08); /* Soft inset shadow */
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
 
-    .message.error {
-      background: #ffecec;
-      color: #e53935;
-    }
+        input:focus {
+            outline: none;
+            border-color: var(--ios-accent-blue); /* iOS blue focus ring */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 3px rgba(0, 122, 255, 0.2); /* Soft blue glow */
+        }
 
-    .message.success {
-      background: #e6fbe8;
-      color: #2e7d32;
-    }
+        input::placeholder {
+            color: var(--ios-secondary-text);
+            opacity: 0.7;
+        }
 
-    @media (max-width: 480px) {
-      .container {
-        padding: 30px 20px;
-      }
-    }
-  </style>
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .button-group button {
+            width: 50%;
+            flex-grow: 1;
+            margin-top: 0;
+        }
+
+        button {
+            padding: 12px 18px; /* Refined padding */
+            border-radius: var(--button-radius);
+            font-size: 1rem;
+            border: none;
+            background: var(--ios-accent-blue); /* iOS blue for primary actions */
+            color: white;
+            font-weight: 600; /* Semibold for button text */
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3); /* Soft blue shadow */
+            transition: all 0.2s ease;
+            -webkit-appearance: none; /* Remove default button styling */
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #005bb5; /* Darker blue on hover */
+            box-shadow: 0 3px 10px rgba(0, 122, 255, 0.4);
+            transform: translateY(-1px); /* Subtle lift */
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(0); /* Press effect */
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+            background-color: #004a99;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Specific styles for secondary buttons (like "Back" or "Cancel") */
+        .button-group #backBtn, #cancelSubmit {
+            background: var(--ios-bg); /* Match body bg */
+            color: var(--ios-accent-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Lighter shadow */
+            border: 1px solid var(--ios-border-color);
+        }
+
+        .button-group #backBtn:hover:not(:disabled), #cancelSubmit:hover {
+            background-color: #e5e5ea; /* Lighter hover for secondary */
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            color: #005bb5;
+        }
+
+        .button-group #backBtn:active:not(:disabled), #cancelSubmit:active {
+            background-color: #d1d1d6;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .option {
+            background: var(--ios-card-bg);
+            padding: 14px 20px;
+            margin: 10px 0; /* Slightly less margin */
+            border-radius: var(--button-radius);
+            border: 1px solid var(--ios-border-color); /* Subtle border */
+            cursor: pointer;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); /* Very soft shadow */
+            transition: all 0.2s ease;
+            user-select: none;
+            color: var(--ios-primary-text);
+            line-height: 1.4;
+        }
+
+        .option:hover {
+            border-color: var(--ios-accent-blue); /* Highlight border on hover */
+            box-shadow: 0 2px 6px rgba(0, 122, 255, 0.1);
+        }
+
+        .option.selected {
+            background: var(--ios-accent-blue);
+            color: white;
+            border-color: var(--ios-accent-blue);
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+            transform: translateY(-1px); /* Subtle lift on selection */
+        }
+
+        .message {
+            text-align: center;
+            padding: 12px;
+            border-radius: var(--button-radius);
+            margin: 15px 0;
+            font-weight: 500;
+            border: 1px solid transparent; /* Default transparent border */
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); /* Soft shadow */
+        }
+
+        .message.error {
+            background: #fff0f0; /* Light red background */
+            color: var(--ios-red);
+            border-color: #ffcccc; /* Soft red border */
+        }
+
+        .message.success {
+            background: #f0fff0; /* Light green background */
+            color: var(--ios-green);
+            border-color: #ccffcc; /* Soft green border */
+        }
+
+        .question-box, .result-box {
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px; /* Thinner progress bar */
+            background: var(--ios-border-color);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08); /* Soft inset */
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--ios-accent-blue); /* Solid iOS blue */
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .question-counter {
+            text-align: center;
+            margin-bottom: 15px;
+            color: var(--ios-secondary-text);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 30px 20px; /* More padding */
+            color: var(--ios-secondary-text);
+            font-size: 1rem;
+        }
+
+        .spinner {
+            border: 3px solid rgba(0, 122, 255, 0.2); /* Lighter blue */
+            border-radius: 50%;
+            border-top: 3px solid var(--ios-accent-blue);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px; /* More space */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Styles for the answer review section */
+        .answer-review {
+            margin-top: 30px;
+            border-top: 1px solid var(--ios-border-color); /* Subtle separator */
+            padding-top: 20px;
+        }
+
+        .answer-review h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--ios-primary-text);
+            font-size: 1.3rem;
+        }
+
+        .answer-item {
+            background: var(--ios-card-bg);
+            border-radius: var(--card-radius);
+            padding: 20px;
+            margin-bottom: 15px; /* Less margin */
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08); /* Soft shadow */
+            border: 1px solid var(--ios-border-color);
+            transition: all 0.2s ease;
+        }
+
+        .answer-item.correct-border {
+            border-color: var(--ios-green);
+            box-shadow: 0 0 0 2px rgba(52, 199, 89, 0.3), 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .answer-item.incorrect-border {
+            border-color: var(--ios-red);
+            box-shadow: 0 0 0 2px rgba(255, 59, 48, 0.3), 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        .answer-item p {
+            margin-bottom: 6px; /* Less space */
+            line-height: 1.4;
+        }
+
+        .answer-item strong {
+            color: var(--ios-primary-text);
+        }
+
+        .answer-item .question-text {
+            font-weight: 600; /* Semibold for question text */
+            margin-bottom: 10px;
+            color: var(--ios-primary-text);
+            font-size: 1.05rem;
+        }
+
+        .answer-item .user-answer {
+            color: var(--ios-red);
+            font-weight: 500;
+        }
+        
+        .answer-item .user-answer.correct {
+            color: var(--ios-green);
+        }
+
+        .answer-item .correct-answer {
+            color: var(--ios-accent-blue);
+            font-weight: 500;
+        }
+        
+        .answer-item .explanation {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--ios-border-color); /* Lighter dashed line */
+            font-size: 0.88em;
+            color: var(--ios-secondary-text);
+        }
+
+        /* --- New/Modified Styles for Login Page Layout --- */
+        #loginBox button {
+            width: 100%;
+            margin-top: 25px; /* More space */
+        }
+
+        .message {
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); /* Soft shadow */
+        }
+
+        /* Custom modal styles (iOS-like) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* Slightly lighter overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background: var(--ios-card-bg);
+            padding: 2rem;
+            border-radius: var(--card-radius);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* More pronounced shadow for modal */
+            text-align: center;
+            max-width: 350px; /* Tighter modal */
+            width: 90%;
+            color: var(--ios-primary-text);
+            border: 1px solid rgba(0,0,0,0.05); /* Light border */
+        }
+        .modal-content button {
+            width: auto;
+            flex-grow: 0;
+            margin: 0 8px; /* Less space between modal buttons */
+            padding: 10px 20px;
+            border-radius: 8px; /* Slightly smaller radius for modal buttons */
+            font-weight: 500; /* Medium weight */
+            box-shadow: none; /* Modal buttons have flat appearance initially */
+            transform: none; /* No lift */
+        }
+        
+        #confirmSubmit {
+            background-color: var(--ios-red); /* iOS red for destructive action */
+            color: white;
+        }
+        #confirmSubmit:hover {
+            background-color: #cc2b22;
+        }
+        #confirmSubmit:active {
+            background-color: #b2251d;
+        }
+
+        #cancelSubmit {
+            background-color: var(--ios-accent-blue); /* iOS blue for primary action in modal */
+            color: white;
+        }
+        #cancelSubmit:hover {
+            background-color: #005bb5;
+        }
+        #cancelSubmit:active {
+            background-color: #004a99;
+        }
+
+        /* Close button (X) */
+        #closeButton {
+            position: absolute;
+            top: 15px; /* Slightly more inset */
+            right: 15px;
+            background: var(--ios-bg); /* Use iOS background color */
+            border-radius: 50%;
+            width: 34px; /* Larger touch target */
+            height: 34px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem; /* Larger X */
+            color: var(--ios-secondary-text);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            padding: 0; /* Remove default padding */
+            line-height: 1; /* Center the X */
+        }
+
+        #closeButton:hover {
+            background-color: #e5e5ea;
+            color: var(--ios-primary-text);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+        #closeButton:active {
+            background-color: #d1d1d6;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transform: translateY(1px);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+                margin: 15px;
+                border-radius: 10px; /* Slightly smaller on small screens */
+            }
+            
+            h2 {
+                font-size: 1.3rem;
+                margin-bottom: 20px;
+            }
+
+            input, button, .option {
+                padding: 10px 14px;
+                font-size: 0.9rem;
+            }
+
+            .option {
+                margin: 8px 0;
+            }
+
+            .button-group button {
+                width: 100%; /* Stack buttons on very small screens */
+                flex-grow: unset;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+            .modal-content button {
+                margin: 0 5px;
+            }
+            #closeButton {
+                top: 10px;
+                right: 10px;
+                width: 30px;
+                height: 30px;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div id="loginBox">
-      <input type="text" id="usernameInput" placeholder="ชื่อผู้ใช้งาน" />
-      <button class="login-button" onclick="attemptLogin()">เข้าสู่ระบบ</button>
-      <div id="loginMessage" class="message"></div>
+<div class="container">
+    <div id="loginBox" style="display:block;">
+        <h2>เข้าสู่ระบบ</h2>
+        <div class="form-group">
+            <label for="usernameInput">ชื่อผู้ใช้:</label>
+            <input type="text" id="usernameInput" placeholder="กรอกชื่อผู้ใช้ของคุณ">
+        </div>
+        <button onclick="attemptLogin()">เข้าสู่ระบบ</button>
+        <div id="loginMessage" class="message" style="display:none;"></div>
     </div>
-  </div>
 
-  <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz6Lr_tetTrlB-fLI4P5cza-IV2EXST8O1bn1wfo1fjObNjo_YllxA3042wN7vHf5cl6w/exec';
+    <div id="loadingBox" class="loading" style="display:none;">
+        <div class="spinner"></div>
+        <p>กำลังโหลดข้อสอบ...</p>
+    </div>
 
-    async function attemptLogin() {
-      const username = document.getElementById('usernameInput').value.trim();
-      const messageBox = document.getElementById('loginMessage');
+    <div id="quizBox" class="question-box" style="display:none;">
+        <button id="closeButton" class="">
+            &times;
+        </button>
 
-      messageBox.style.display = 'none';
-      messageBox.textContent = '';
+        <div class="progress-bar">
+            <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+        </div>
+        
+        <div id="questionCounter" class="question-counter"></div>
+        <h4 id="questionText"></h4>
+        <div id="options"></div>
+        
+        <div class="button-group">
+            <button id="nextBtn" onclick="nextQuestion()">ถัดไป</button>
+            <button id="backBtn" onclick="previousQuestion()">ย้อนกลับ</button>
+        </div>
+    </div>
 
-      if (!username) {
-        showMessage('กรุณากรอกชื่อผู้ใช้งาน', 'error');
+    <div id="resultBox" class="result-box" style="display:none;">
+        <h2>ผลลัพธ์การสอบ</h2>
+        <div id="scoreDisplay"></div>
+        <div id="answerReview"></div> 
+        <button onclick="resetQuiz()">ทำใหม่</button> 
+    </div>
+</div>
+
+<div id="confirmationModal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <p class="text-xl font-semibold mb-4">ยืนยันการส่งคำตอบ</p>
+        <p class="mb-6">คุณต้องการส่งคำตอบตอนนี้หรือไม่? คุณจะไม่สามารถกลับมาทำข้อสอบต่อได้</p>
+        <div class="flex justify-center space-x-4">
+            <button id="cancelSubmit">ยกเลิก</button>
+            <button id="confirmSubmit">ส่งคำตอบ</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// **สำคัญมาก: ต้องเปลี่ยน URL นี้เป็น URL ที่ได้จากการ Deploy Apps Script ของคุณเสมอ**
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz6Lr_tetTrlB-fLI4P5cza-IV2EXST8O1bn1wfo1fjObNjo_YllxA3042wN7vHf5cl6w/exec';
+// --- ตัวแปรหลัก ---
+let questions = [];
+let currentQuestion = 0;
+let userName = '';
+// จะเก็บ username ที่ผู้ใช้ป้อนและตรวจสอบสำเร็จ
+let displayUserName = ''; // จะเก็บ 'ชื่อ' ที่ดึงมาจาก Sheet (ช่อง D)
+let userAnswers = [];
+// เก็บ index ของตัวเลือกที่ผู้ใช้เลือก
+let startTime;
+
+// --- ฟังก์ชันสำหรับจัดการ UI และการทำงาน ---
+
+// ฟังก์ชันแสดงข้อความแจ้งเตือนบน UI
+function showMessage(text, type = 'error', targetElementId = 'loginMessage') {
+    const messageElement = document.getElementById(targetElementId);
+    if (messageElement) {
+        messageElement.textContent = text;
+        messageElement.className = `message ${type}`;
+        messageElement.style.display = 'block';
+    } else {
+        console.error(`Target element for message not found: ${targetElementId}`);
+    }
+}
+
+// ฟังก์ชันสลับการแสดงผลของหน้าต่างๆ
+function switchView(viewId) {
+    ['loginBox', 'loadingBox', 'quizBox', 'resultBox'].forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.style.display = (id === viewId) ? 'block' : 'none';
+        }
+    });
+}
+
+
+// --- Logic การทำงานของแบบทดสอบ ---
+
+// 1. ฟังก์ชันพยายามล็อกอิน
+async function attemptLogin() {
+    const usernameInput = document.getElementById('usernameInput');
+    const enteredUsername = usernameInput.value.trim();
+    // ซ่อนข้อความแจ้งเตือนเก่าทันทีเมื่อมีการพยายามเข้าสู่ระบบใหม่
+    const loginMessageElement = document.getElementById('loginMessage');
+    if (loginMessageElement) {
+        loginMessageElement.style.display = 'none';
+        loginMessageElement.textContent = '';
+    }
+
+    if (!enteredUsername) {
+        showMessage('กรุณากรอกชื่อผู้ใช้', 'error', 'loginMessage');
         return;
-      }
+    }
+    
+    switchView('loadingBox');
+    // แสดงหน้าโหลด
 
-      try {
-        const response = await fetch(`${SCRIPT_URL}?action=checkUser&username=${encodeURIComponent(username)}`);
+    try {
+        const response = await fetch(`${SCRIPT_URL}?action=checkUser&username=${encodeURIComponent(enteredUsername)}`);
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
         const data = await response.json();
 
         if (data.success && data.valid) {
-          showMessage('เข้าสู่ระบบสำเร็จ', 'success');
-          // ไปยังหน้าทำข้อสอบ หรือโหลด quiz.html
-          // location.href = 'quiz.html';
+            userName = data.username;
+            // เก็บ username จริงที่ใช้ในการตรวจสอบ
+            displayUserName = data.name; // เก็บชื่อที่ใช้แสดงผล (จากช่อง D)
+            startQuiz();
+            // เริ่มโหลดข้อสอบหลังจากล็อกอินสำเร็จ
         } else {
-          showMessage(data.message || 'ชื่อผู้ใช้งานไม่ถูกต้อง', 'error');
+            switchView('loginBox'); // กลับไปหน้าล็อกอิน
+            showMessage(data.message || 'ไม่สามารถเข้าสู่ระบบได้', 'error', 'loginMessage');
         }
-      } catch (error) {
-        console.error(error);
-        showMessage('เกิดข้อผิดพลาดในการเชื่อมต่อ', 'error');
-      }
+    } catch (error) {
+        console.error('Error during login:', error);
+        switchView('loginBox'); // กลับไปหน้าล็อกอิน
+        showMessage('เกิดข้อผิดพลาดในการเชื่อมต่อ: ' + error.message, 'error', 'loginMessage');
     }
+}
 
-    function showMessage(text, type) {
-      const box = document.getElementById('loginMessage');
-      box.textContent = text;
-      box.className = `message ${type}`;
-      box.style.display = 'block';
+// 2. ฟังก์ชันเริ่มโหลดข้อสอบ (ถูกเรียกหลังจากล็อกอินสำเร็จ)
+async function startQuiz() {
+    // ล้างค่าสำหรับเริ่มสอบใหม่
+    questions = [];
+    currentQuestion = 0;
+    userAnswers = [];
+    try {
+        const questionsResponse = await fetch(`${SCRIPT_URL}?action=getQuestions`);
+        if (!questionsResponse.ok) {
+            throw new Error(`Network response was not ok: ${questionsResponse.statusText}`);
+        }
+        const questionsData = await questionsResponse.json();
+        
+        if (!questionsData.success || !questionsData.data || questionsData.data.length === 0) {
+            throw new Error(questionsData.message || 'ไม่มีข้อสอบในระบบ');
+        }
+        
+        questions = questionsData.data;
+        startTime = new Date(); // เริ่มจับเวลาเมื่อโหลดข้อสอบสำเร็จ
+        
+        // เปลี่ยนไปหน้าข้อสอบ
+        switchView('quizBox');
+        showQuestion();
+    } catch (error) {
+        console.error('Error starting quiz:', error);
+        switchView('loginBox'); // กลับไปหน้าล็อกอินเพื่อให้ผู้ใช้เห็นข้อผิดพลาด
+        showMessage(`Error: ${error.message}`, 'error', 'loginMessage');
     }
-  </script>
+}
+
+// 3. ฟังก์ชันแสดงคำถามปัจจุบัน
+function showQuestion() {
+    if (currentQuestion >= questions.length) {
+        showResult();
+        // If all questions are done, show results
+        return;
+    }
+    
+    const question = questions[currentQuestion];
+    const progress = ((currentQuestion) / questions.length) * 100;
+    
+    // อัปเดต UI
+    document.getElementById('progressFill').style.width = `${progress}%`;
+    document.getElementById('questionCounter').textContent = `ข้อที่ ${currentQuestion + 1} จาก ${questions.length}`;
+    document.getElementById('questionText').textContent = question.question;
+    
+    // สร้างตัวเลือก
+    const optionsContainer = document.getElementById('options');
+    optionsContainer.innerHTML = '';
+    question.options.forEach((option, index) => {
+        if (typeof option === 'string' && option.trim() !== '') {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'option';
+            optionDiv.textContent = option;
+            optionDiv.onclick = () => selectOption(index, optionDiv);
+            optionsContainer.appendChild(optionDiv);
+
+            // Restore selected option visual if user came back to this question
+            if (userAnswers[currentQuestion] === index) {
+                optionDiv.classList.add('selected');
+            }
+        }
+    });
+    // อัปเดตข้อความและสถานะของปุ่ม "ถัดไป" และ "ย้อนกลับ"
+    const nextBtn = document.getElementById('nextBtn');
+    const backBtn = document.getElementById('backBtn');
+    nextBtn.textContent = currentQuestion === questions.length - 1 ? 'จบการสอบ' : 'ถัดไป';
+    backBtn.disabled = currentQuestion === 0;
+}
+
+function selectOption(index, element) {
+    // Remove 'selected' class from all options in the current question
+    const options = element.parentElement.querySelectorAll('.option');
+    options.forEach(opt => opt.classList.remove('selected'));
+    
+    // Add 'selected' class to the clicked option
+    element.classList.add('selected');
+    userAnswers[currentQuestion] = index;
+}
+
+function nextQuestion() {
+    if (userAnswers[currentQuestion] === undefined) {
+        showMessage('กรุณาเลือกคำตอบก่อนดำเนินการต่อ', 'error', 'questionCounter'); // Use showMessage instead of alert
+        return;
+    }
+    
+    currentQuestion++;
+    showQuestion();
+}
+
+function previousQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion();
+    }
+}
+
+// 4. ฟังก์ชันแสดงผลลัพธ์และบันทึก
+async function showResult() {
+    switchView('resultBox');
+    
+    const endTime = new Date();
+    const timeSpent = Math.floor((endTime - startTime) / 1000);
+    let correctCount = 0;
+    for (let i = 0; i < questions.length; i++) {
+        if (userAnswers[i] !== undefined && questions[i] && questions[i].correct !== undefined && userAnswers[i] === questions[i].correct) {
+            correctCount++;
+        }
+    }
+    const percentage = (questions.length > 0) ? (correctCount / questions.length) * 100 : 0;
+    // แสดงผลคะแนน
+    document.getElementById('scoreDisplay').innerHTML = `
+        <div class="message success">
+            <h3>คะแนนของคุณ: ${percentage.toFixed(1)}%</h3>
+            <p>คุณ ${displayUserName ||
+            userName} ตอบถูก ${correctCount} ข้อ จากทั้งหมด ${questions.length} ข้อ</p>
+            <p>ใช้เวลา ${Math.floor(timeSpent / 60)} นาที ${timeSpent % 60} วินาที</p>
+        </div>
+    `;
+    // แสดงเฉลย
+    const answerReviewContainer = document.getElementById('answerReview');
+    answerReviewContainer.innerHTML = '<h3 class="answer-review">เฉลยและคำอธิบาย</h3>';
+    questions.forEach((question, index) => {
+        const userAnswerIndex = userAnswers[index];
+        const userAnswerText = userAnswerIndex !== undefined && question.options[userAnswerIndex] !== undefined ? question.options[userAnswerIndex] : 'ไม่ได้ตอบ';
+        const correctAnswerText = question.options[question.correct] !== undefined ? question.options[question.correct] : 'ไม่ทราบ';
+        const isCorrect = userAnswerIndex === question.correct;
+
+        const answerItemDiv = document.createElement('div');
+        answerItemDiv.className = `answer-item ${isCorrect ? 'correct-border' : 'incorrect-border'}`;
+        
+        answerItemDiv.innerHTML = `
+            <p class="question-text">ข้อ ${index + 1}: ${question.question}</p>
+            <p>คำตอบของคุณ: <span class="user-answer ${isCorrect ? 'correct' : ''}">${userAnswerText}</span></p>
+            <p>คำตอบที่ถูกต้อง: <span class="correct-answer">${correctAnswerText}</span></p>
+            ${question.explanation ? `<p class="explanation">คำอธิบาย: ${question.explanation}</p>` : ''}
+        `;
+        answerReviewContainer.appendChild(answerItemDiv);
+    });
+
+    // บันทึกผลสอบ
+    try {
+        const resultData = {
+            userName: userName,
+            userCode: '', // ไม่ได้ใช้แล้ว
+            score: percentage, 
+            correctAnswers: correctCount, 
+            totalQuestions: questions.length,
+            answers: userAnswers,
+            timeSpent: timeSpent,
+            ipAddress: '' // ต้องดึงจากฝั่ง server-side (Apps Script) หากต้องการ
+        };
+        const saveResponse = await fetch(SCRIPT_URL, { // Capture response
+            method: 'POST',
+            body: JSON.stringify(resultData),
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!saveResponse.ok) { // Check if save was successful
+            throw new Error(`Failed to save result: ${saveResponse.statusText}`);
+        }
+        const saveResultData = await saveResponse.json(); // Parse response
+        if (saveResultData.success) {
+            console.log("บันทึกผลสอบสำเร็จ:", saveResultData.message);
+            // Optionally show a success message on the result page
+            // showMessage("บันทึกผลสอบสำเร็จ!", "success", "scoreDisplay");
+        } else {
+            console.error("เกิดข้อผิดพลาดในการบันทึกผลสอบ:", saveResultData.message);
+            // Optionally show an error message on the result page
+            // showMessage(`เกิดข้อผิดพลาดในการบันทึกผลสอบ: ${saveResultData.message}`, "error", "scoreDisplay");
+        }
+        
+    } catch (error) {
+        console.error('เกิดข้อผิดพลาดในการบันทึกผลสอบ:', error);
+        // You might want to show this error on the result page
+        showMessage(`เกิดข้อผิดพลาดในการบันทึกผลสอบ: ${error.message}`, "error", "scoreDisplay");
+    }
+}
+
+// Function to handle early quiz submission
+function submitQuizEarly() {
+    console.log("Attempting to submit quiz early...");
+    // Directly call showResult to calculate score, display results, and save.
+    showResult();
+}
+
+
+// 5. ฟังก์ชันรีเซ็ตกลับไปหน้าล็อกอิน
+function resetQuiz() {
+    // รีเซ็ตตัวแปรสถานะ
+    questions = [];
+    currentQuestion = 0;
+    userName = '';
+    displayUserName = '';
+    userAnswers = [];
+    startTime = null; 
+
+    // เคลียร์ค่า input และข้อความ
+    const usernameInput = document.getElementById('usernameInput');
+    if(usernameInput) usernameInput.value = '';
+    const loginMessageElement = document.getElementById('loginMessage');
+    if (loginMessageElement) {
+        loginMessageElement.style.display = 'none';
+        loginMessageElement.textContent = '';
+    }
+    
+    // กลับไปหน้าล็อกอิน
+    switchView('loginBox');
+}
+
+// Event Listeners for the new close button and modal
+const closeButton = document.getElementById('closeButton');
+const confirmationModal = document.getElementById('confirmationModal');
+const confirmSubmitButton = document.getElementById('confirmSubmit');
+const cancelSubmitButton = document.getElementById('cancelSubmit');
+// Function to show the confirmation modal
+function showConfirmationModal() {
+    confirmationModal.classList.remove('hidden');
+}
+
+// Function to hide the confirmation modal
+function hideConfirmationModal() {
+    confirmationModal.classList.add('hidden');
+}
+
+// Event listener for the close button
+closeButton.addEventListener('click', showConfirmationModal);
+// Event listener for the "ส่งคำตอบ" (Submit) button in the modal
+confirmSubmitButton.addEventListener('click', () => {
+    hideConfirmationModal();
+    submitQuizEarly(); // Call the function to submit the quiz results
+});
+// Event listener for the "ยกเลิก" (Cancel) button in the modal
+cancelSubmitButton.addEventListener('click', hideConfirmationModal);
+// Event Listener: เริ่มต้นการทำงานเมื่อหน้าเว็บโหลดเสร็จ
+document.addEventListener('DOMContentLoaded', function() {
+    // เริ่มต้นโดยการแสดงหน้าล็อกอินเท่านั้น
+    switchView('loginBox');
+});
+</script>
 </body>
 </html>
