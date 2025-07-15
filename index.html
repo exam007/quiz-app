@@ -50,7 +50,7 @@
         .container {
             background: var(--card-bg);
             border-radius: var(--card-radius);
-            padding: 40px 35px; /* เพิ่ม padding ให้ดูโปร่งขึ้น */
+            padding: 35px 35px; /* ปรับ padding ด้านบน/ล่างให้น้อยลง */
             max-width: 500px; /* ขยายความกว้างเล็กน้อย */
             width: 100%;
             /* เงาที่ชัดเจนแต่ยังดูนุ่มนวลตามรูปภาพ */
@@ -92,7 +92,7 @@
 
         input {
             width: 100%;
-            padding: 18px 22px; /* เพิ่ม padding */
+            padding: 16px 22px; /* ลด padding แนวตั้งให้สั้นลง */
             border-radius: var(--element-radius);
             font-size: 1.15rem;
             border: 1px solid var(--border-color);
@@ -130,9 +130,9 @@
         }
 
         button {
-            padding: 18px 25px; /* เพิ่ม padding */
+            padding: 16px 25px; /* ลด padding แนวตั้งให้สั้นลง */
             border-radius: var(--element-radius);
-            font-size: 1.15rem;
+            font-size: 1.2rem; /* เพิ่มขนาด font ให้ปุ่มดูใหญ่ขึ้น */
             border: none;
             background: var(--accent-blue);
             color: white;
@@ -182,6 +182,15 @@
             background-color: #ededed;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.18);
         }
+        
+        /* ปุ่มล็อกอิน: จัดกึ่งกลางและมีขนาดที่เหมาะสม */
+        #loginBox button {
+            display: block; /* ทำให้สามารถใช้ margin: auto ได้ */
+            width: 100%;
+            max-width: 350px; /* จำกัดความกว้างไม่ให้เต็ม 100% */
+            margin: 40px auto 0; /* จัดกึ่งกลางแนวนอน */
+        }
+
 
         .option {
             background: var(--card-bg);
@@ -361,12 +370,6 @@
             color: var(--text-secondary);
         }
 
-        /* --- New/Modified Styles for Login Page Layout --- */
-        #loginBox button {
-            width: 100%;
-            margin-top: 40px; /* เพิ่ม margin-top */
-        }
-
         /* Custom Confirmation Modal */
         .modal-overlay {
             position: fixed;
@@ -486,14 +489,21 @@
                 font-size: 1rem;
             }
 
-            input, button, .option {
-                padding: 16px 20px;
-                font-size: 1.05rem;
+            input {
+                padding: 14px 20px; /* ปรับ input บนมือถือให้สั้นลงอีก */
+                font-size: 1rem;
+            }
+            
+            button {
+                padding: 14px 20px; /* ปรับปุ่มบนมือถือให้สั้นลง */
+                font-size: 1.1rem; /* เพิ่มขนาด font ให้ปุ่มบนมือถือ */
                 border-radius: 10px;
             }
 
             .option {
+                padding: 18px 24px; /* ลด padding option บนมือถือ */
                 margin: 12px 0;
+                font-size: 1.05rem;
             }
 
             .button-group {
