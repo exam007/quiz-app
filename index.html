@@ -570,7 +570,8 @@
 
     <div id="resultBox" class="result-box" style="display:none;">
         <h2>ผลลัพธ์การสอบ</h2>
-        <div id="scoreDisplay"></div> <div id="answerReview"></div> 
+        <div id="scoreDisplay"></div>
+        <div id="answerReview"></div> 
         <button onclick="resetQuiz()">ทำใหม่</button> 
     </div>
 </div>
@@ -766,7 +767,7 @@ function previousQuestion() {
     }
 }
 
-// 4. ฟังก์ชันแสดงผลลัพธ์และบันทึก
+// 4. ฟังก์ชันแสดงผลลัพธ์ (โดยไม่มีการบันทึก)
 async function showResult() {
     switchView('resultBox');
     
@@ -811,48 +812,14 @@ async function showResult() {
         answerReviewContainer.appendChild(answerItemDiv);
     });
 
-    // บันทึกผลสอบ
-    try {
-        const resultData = {
-            userName: userName,
-            userCode: '', // ไม่ได้ใช้แล้ว
-            score: percentage, 
-            correctAnswers: correctCount, 
-            totalQuestions: questions.length,
-            answers: userAnswers,
-            timeSpent: timeSpent,
-            ipAddress: '' // ต้องดึงจากฝั่ง server-side (Apps Script) หากต้องการ
-        };
-        const saveResponse = await fetch(SCRIPT_URL, { // Capture response
-            method: 'POST',
-            body: JSON.stringify(resultData),
-            headers: { "Content-Type": "application/json" }
-        });
-        if (!saveResponse.ok) { // Check if save was successful
-            throw new Error(`Failed to save result: ${saveResponse.statusText}`);
-        }
-        const saveResultData = await saveResponse.json(); // Parse response
-        if (saveResultData.success) {
-            console.log("บันทึกผลสอบสำเร็จ:", saveResultData.message);
-            // Optionally show a success message on the result page
-            // showMessage("บันทึกผลสอบสำเร็จ!", "success", "scoreDisplay");
-        } else {
-            console.error("เกิดข้อผิดพลาดในการบันทึกผลสอบ:", saveResultData.message);
-            // Optionally show an error message on the result page
-            // showMessage(`เกิดข้อผิดพลาดในการบันทึกผลสอบ: ${saveResultData.message}`, "error", "scoreDisplay");
-        }
-        
-    } catch (error) {
-        console.error('เกิดข้อผิดพลาดในการบันทึกผลสอบ:', error);
-        // You might want to show this error on the result page
-        showMessage(`เกิดข้อผิดพลาดในการบันทึกผลสอบ: ${error.message}`, "error", "scoreDisplay");
-    }
+    // *** ส่วนของการบันทึกผลสอบถูกลบออกแล้ว ***
+    console.log("การบันทึกผลสอบถูกปิดการใช้งาน");
 }
 
 // Function to handle early quiz submission
 function submitQuizEarly() {
     console.log("Attempting to submit quiz early...");
-    // Directly call showResult to calculate score, display results, and save.
+    // Directly call showResult to calculate score, display results, and show results.
     showResult();
 }
 
