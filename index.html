@@ -4,25 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แบบทดสอบ ภาค ก. ท้องถิ่น กฎหมาย 200 ข้อ</title>
+    <!-- Inter Font for modern, clean typography -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN (for utilities and modal, though mostly custom CSS) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            /* สีที่ปรับให้เหมือนรูปภาพ */
-            --bg-color: #f8f8f8; /* พื้นหลังโดยรวมที่สว่างและสะอาด */
+            /* สีและขนาดสำหรับสไตล์ Soft UI / Neumorphism */
+            --bg-color: #e0e5ec; /* พื้นหลังโดยรวมที่นุ่มนวล */
             --card-bg: #ffffff; /* สีพื้นหลังของ Card */
-            --text-primary: #1a1a1a; /* สีข้อความหลักที่เข้มขึ้นเล็กน้อย */
-            --text-secondary: #707070; /* สีข้อความรอง */
-            --border-color: #e0e0e0; /* สีขอบอ่อนๆ */
-            --shadow-light: rgba(0, 0, 0, 0.04); /* เงาอ่อนมาก */
-            --shadow-medium: rgba(0, 0, 0, 0.1); /* เงาปานกลางสำหรับ Card */
-            --shadow-deep: rgba(0, 0, 0, 0.15); /* เงาเข้มขึ้นสำหรับ hover/active */
+            --text-primary: #333; /* สีข้อความหลักที่เข้มขึ้นเล็กน้อย */
+            --text-secondary: #6b6b6b; /* สีข้อความรอง */
+            
+            /* Shadows for Soft UI elements */
+            --neumorphic-light-shadow: #ffffff; /* เงาสว่างสำหรับด้านบน/ซ้าย */
+            --neumorphic-dark-shadow: #a7a9af; /* เงาเข้มสำหรับด้านล่าง/ขวา */
+
             --accent-blue: #007aff; /* สีฟ้า iOS */
             --accent-red: #ff3b30; /* สีแดง iOS */
             --accent-green: #34c759; /* สีเขียว iOS */
 
-            --card-radius: 18px; /* ขอบโค้งของ Card ที่ชัดเจนและกลมขึ้น */
-            --element-radius: 12px; /* ขอบโค้งสำหรับปุ่ม, input, option */
+            --card-radius: 24px; /* ขอบโค้งของ Card ที่กลมขึ้น */
+            --element-radius: 16px; /* ขอบโค้งสำหรับปุ่ม, input, option ที่กลมขึ้น */
         }
 
         * {
@@ -31,7 +34,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-color); /* ใช้พื้นหลังใหม่ */
+            background: var(--bg-color); /* ใช้พื้นหลัง Soft UI */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -46,75 +49,87 @@
         .container {
             background: var(--card-bg);
             border-radius: var(--card-radius);
-            padding: 35px 30px; /* เพิ่ม padding ให้ดูโปร่งขึ้น */
-            max-width: 480px; /* ขยายความกว้างเล็กน้อย */
+            padding: 40px; /* เพิ่ม padding ให้ดูโปร่งขึ้น */
+            max-width: 500px;
             width: 100%;
-            /* เงาที่ชัดเจนแต่ยังดูนุ่มนวลตามรูปภาพ */
-            box-shadow: 0 10px 30px var(--shadow-medium),
-                        0 4px 10px var(--shadow-light);
+            /* เงา Soft UI สำหรับ Card หลัก */
+            box-shadow: 10px 10px 30px var(--neumorphic-dark-shadow), /* เงาด้านขวา-ล่าง */
+                        -10px -10px 30px var(--neumorphic-light-shadow); /* เงาด้านซ้าย-บน (light) */
             position: relative;
             overflow: hidden;
-            border: 1px solid var(--border-color); /* ขอบบางๆ */
+            border: none; /* ไม่มีขอบแข็ง */
+        }
+
+        .app-title {
+            text-align: center;
+            font-size: 1.6rem; /* ขนาดใหญ่ขึ้นเล็กน้อย */
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 20px; /* ระยะห่างด้านล่าง */
         }
 
         h1, h2 {
             text-align: center;
-            margin-bottom: 30px; /* เพิ่มระยะห่างด้านล่าง */
-            font-weight: 700; /* Bold for titles */
-            font-size: 2rem; /* ขนาดใหญ่ขึ้น */
+            margin-bottom: 35px;
+            font-weight: 700;
+            font-size: 2.2rem; /* ขนาดใหญ่ขึ้น */
             color: var(--text-primary);
         }
 
         h4 {
             text-align: left;
-            margin-bottom: 25px; /* เพิ่มระยะห่างด้านล่าง */
-            font-weight: 600; /* Semibold for question text */
-            font-size: 1.25rem; /* ขนาดใหญ่ขึ้น */
+            margin-bottom: 28px;
+            font-weight: 600;
+            font-size: 1.3rem;
             line-height: 1.6;
             color: var(--text-primary);
         }
 
         .form-group {
-            margin-bottom: 25px; /* เพิ่มระยะห่าง */
+            margin-bottom: 30px;
         }
 
         label {
             display: block;
-            margin-bottom: 10px; /* เพิ่มระยะห่าง */
+            margin-bottom: 15px; /* เพิ่มระยะห่าง */
             font-weight: 600;
             color: var(--text-secondary);
-            font-size: 1rem; /* ขนาดปกติ */
+            font-size: 1.1rem; /* ขนาดใหญ่ขึ้นเล็กน้อย */
+            text-align: center; /* จัดกึ่งกลาง label */
         }
 
         input {
             width: 100%;
-            padding: 16px 20px; /* เพิ่ม padding */
+            padding: 18px 25px; /* ปรับ padding ให้ดูใหญ่ขึ้นเล็กน้อย */
             border-radius: var(--element-radius);
-            font-size: 1.1rem;
-            border: 1px solid var(--border-color);
-            background: var(--card-bg); /* ใช้สีพื้นหลัง Card */
+            font-size: 1.2rem; /* เพิ่มขนาด font */
+            border: none; /* ไม่มีขอบ */
+            background: var(--bg-color); /* สีพื้นหลังของ input ให้เข้ากับพื้นหลังโดยรวม */
             color: var(--text-primary);
-            /* เงา inset ที่ละเอียดขึ้น */
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            /* เงาแบบกดจมลง (inset) สำหรับ Soft UI */
+            box-shadow: inset 5px 5px 10px var(--neumorphic-dark-shadow), 
+                        inset -5px -5px 10px var(--neumorphic-light-shadow);
+            transition: all 0.3s ease;
         }
 
         input:focus {
             outline: none;
-            border-color: var(--accent-blue);
-            /* เงาเรืองแสงที่นุ่มนวล */
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 0 4px rgba(0, 122, 255, 0.2);
+            border: none;
+            /* เงาเรืองแสงที่นุ่มนวลขึ้นเมื่อ focus */
+            box-shadow: inset 3px 3px 6px var(--neumorphic-dark-shadow), 
+                        inset -3px -3px 6px var(--neumorphic-light-shadow), 
+                        0 0 0 4px rgba(0, 122, 255, 0.3);
         }
 
         input::placeholder {
             color: var(--text-secondary);
-            opacity: 0.7;
+            opacity: 0.75;
         }
 
         .button-group {
             display: flex;
-            gap: 15px; /* เพิ่มระยะห่างระหว่างปุ่ม */
-            margin-top: 30px; /* เพิ่ม margin-top */
+            gap: 18px;
+            margin-top: 35px;
             width: 100%;
             flex-wrap: wrap;
         }
@@ -126,29 +141,33 @@
         }
 
         button {
-            padding: 16px 22px; /* เพิ่ม padding */
+            padding: 18px 30px; /* เพิ่ม padding ให้ปุ่มดูใหญ่และสูงขึ้น */
             border-radius: var(--element-radius);
-            font-size: 1.1rem;
+            font-size: 1.3rem; /* เพิ่มขนาด font ให้ปุ่มดูใหญ่ขึ้นอย่างชัดเจน */
             border: none;
             background: var(--accent-blue);
             color: white;
             font-weight: 600;
             cursor: pointer;
-            /* เงาที่ยกตัวขึ้นชัดเจน */
-            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.35);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother transition */
+            /* เงาแบบยกตัวขึ้นสำหรับ Soft UI */
+            box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
+                        -6px -6px 12px var(--neumorphic-light-shadow);
+            transition: all 0.3s ease;
             -webkit-appearance: none;
         }
 
         button:hover:not(:disabled) {
             background-color: #006ddb; /* Darker blue on hover */
-            box-shadow: 0 8px 20px rgba(0, 122, 255, 0.45);
-            transform: translateY(-3px); /* ยกตัวขึ้นมากขึ้น */
+            box-shadow: 8px 8px 15px var(--neumorphic-dark-shadow), 
+                        -8px -8px 15px var(--neumorphic-light-shadow);
+            transform: translateY(-2px); /* ยกตัวขึ้นเล็กน้อย */
         }
 
         button:active:not(:disabled) {
             transform: translateY(0);
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+            /* เงาแบบกดจมลงเมื่อกด */
+            box-shadow: inset 4px 4px 8px var(--neumorphic-dark-shadow), 
+                        inset -4px -4px 8px var(--neumorphic-light-shadow);
             background-color: #005aab;
         }
 
@@ -156,80 +175,94 @@
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
-            box-shadow: none;
-            background-color: #a7d9ff; /* สีอ่อนลงเมื่อ disabled */
+            box-shadow: none; /* ไม่มีเงาเมื่อ disabled */
+            background-color: #a7d9ff;
         }
 
-        /* Specific styles for secondary buttons (like "Back" or "Cancel") */
+        /* Secondary buttons (Back, Cancel) */
         .button-group #backBtn, #cancelSubmit {
-            background: var(--card-bg); /* สีพื้นหลัง Card */
-            color: var(--accent-blue);
-            box-shadow: 0 3px 10px var(--shadow-light); /* เงาอ่อนลง */
-            border: 1px solid var(--border-color);
+            background: var(--bg-color); /* ใช้สีพื้นหลังโดยรวมสำหรับปุ่มรอง */
+            color: var(--text-primary); /* ใช้สีข้อความหลัก */
+            box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
+                        -6px -6px 12px var(--neumorphic-light-shadow); /* เงาแบบยกตัวขึ้น */
+            border: none;
         }
 
         .button-group #backBtn:hover:not(:disabled), #cancelSubmit:hover {
-            background-color: #f2f2f2; /* Lighter hover for secondary */
-            box-shadow: 0 5px 15px var(--shadow-medium);
-            color: #005bb5;
+            background-color: #ebf0f5; /* Lighter hover for secondary */
+            box-shadow: 8px 8px 15px var(--neumorphic-dark-shadow), 
+                        -8px -8px 15px var(--neumorphic-light-shadow);
+            color: var(--text-primary);
         }
 
         .button-group #backBtn:active:not(:disabled), #cancelSubmit:active {
-            background-color: #e8e8e8;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+            background-color: #d8dee6;
+            box-shadow: inset 4px 4px 8px var(--neumorphic-dark-shadow), 
+                        inset -4px -4px 8px var(--neumorphic-light-shadow);
+        }
+        
+        /* ปุ่มล็อกอิน: จัดกึ่งกลางและมีขนาดที่เหมาะสม (เต็มความกว้างใน container) */
+        #loginBox button {
+            display: block;
+            width: 100%; /* ทำให้เต็มความกว้างของ container */
+            max-width: none; /* ยกเลิก max-width เดิม */
+            margin: 40px 0 0; /* ไม่มี auto margin เพราะเต็ม width */
         }
 
         .option {
-            background: var(--card-bg);
-            padding: 18px 25px; /* เพิ่ม padding */
-            margin: 15px 0; /* เพิ่ม margin */
+            background: var(--bg-color); /* ใช้สีพื้นหลังสำหรับตัวเลือก */
+            padding: 20px 28px;
+            margin: 16px 0;
             border-radius: var(--element-radius);
-            border: 1px solid var(--border-color);
+            border: none; /* ไม่มีขอบ */
             cursor: pointer;
-            /* เงาที่ยกตัวขึ้นเล็กน้อย */
-            box-shadow: 0 2px 8px var(--shadow-light);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            /* เงาแบบยกตัวขึ้นเล็กน้อย */
+            box-shadow: 3px 3px 6px var(--neumorphic-dark-shadow), 
+                        -3px -3px 6px var(--neumorphic-light-shadow);
+            transition: all 0.3s ease;
             user-select: none;
             color: var(--text-primary);
             line-height: 1.5;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             font-weight: 500;
         }
 
         .option:hover {
-            border-color: var(--accent-blue);
-            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.1);
-            transform: translateY(-2px); /* ยกตัวขึ้นเมื่อ hover */
+            box-shadow: 5px 5px 10px var(--neumorphic-dark-shadow), 
+                        -5px -5px 10px var(--neumorphic-light-shadow);
+            transform: translateY(-2px);
+            background-color: #ebf0f5; /* สีอ่อนลงเล็กน้อยเมื่อ hover */
+            border: none;
         }
 
         .option.selected {
             background: var(--accent-blue);
             color: white;
-            border-color: var(--accent-blue);
-            box-shadow: 0 5px 18px rgba(0, 122, 255, 0.45); /* เงาเข้มขึ้นเมื่อเลือก */
-            transform: translateY(-3px); /* ยกตัวขึ้นชัดเจนเมื่อเลือก */
+            /* เงาแบบกดจมลงเมื่อเลือก */
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.3), 
+                        inset -4px -4px 8px rgba(255, 255, 255, 0.2);
+            transform: none; /* ไม่มี lift เมื่อเลือก */
+            border: none;
         }
 
         .message {
             text-align: center;
-            padding: 18px; /* เพิ่ม padding */
+            padding: 20px;
             border-radius: var(--element-radius);
-            margin: 20px 0; /* เพิ่ม margin */
+            margin: 22px 0;
             font-weight: 500;
-            border: 1px solid transparent;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* เงาสำหรับ message */
+            border: none; /* ไม่มีขอบ */
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08); /* เงาปกติสำหรับ message */
         }
 
         .message.error {
-            background: #ffebeb; /* Light red background */
+            background: #fff0f0;
             color: var(--accent-red);
-            border-color: #ffd0d0; /* Soft red border */
         }
 
         .message.success {
-            background: #ebffeb; /* Light green background */
+            background: #f0fff0;
             color: var(--accent-green);
-            border-color: #d0ffd0; /* Soft green border */
         }
 
         .question-box, .result-box {
@@ -238,45 +271,45 @@
 
         .progress-bar {
             width: 100%;
-            height: 8px; /* หนาขึ้นเล็กน้อย */
-            background: var(--border-color);
-            border-radius: 4px;
-            margin-bottom: 25px;
+            height: 10px;
+            background: var(--neumorphic-dark-shadow); /* ใช้สีเข้มของ neumorphism */
+            border-radius: 5px;
+            margin-bottom: 30px;
             overflow: hidden;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inset shadow */
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2); /* เงา inset ให้ดูจมลง */
         }
 
         .progress-fill {
             height: 100%;
             background: var(--accent-blue);
-            border-radius: 4px;
+            border-radius: 5px;
             transition: width 0.3s ease;
-            box-shadow: 0 0 8px rgba(0, 122, 255, 0.4); /* เงาสีฟ้าที่ปลาย */
+            box-shadow: 0 0 10px rgba(0, 122, 255, 0.45);
         }
 
         .question-counter {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 500;
         }
 
         .loading {
             text-align: center;
-            padding: 40px 20px;
+            padding: 50px 20px;
             color: var(--text-secondary);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
         .spinner {
-            border: 4px solid rgba(0, 122, 255, 0.2);
+            border: 5px solid rgba(0, 122, 255, 0.2);
             border-radius: 50%;
-            border-top: 4px solid var(--accent-blue);
-            width: 40px;
-            height: 40px;
+            border-top: 5px solid var(--accent-blue);
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 25px;
+            margin: 0 auto 30px;
         }
 
         @keyframes spin {
@@ -286,42 +319,43 @@
 
         /* Styles for the answer review section */
         .answer-review {
-            margin-top: 35px; /* เพิ่ม margin-top */
-            border-top: 1px solid var(--border-color);
-            padding-top: 25px;
+            margin-top: 40px;
+            border-top: 1px dashed rgba(0,0,0,0.1); /* เส้นประแบ่งส่วน */
+            padding-top: 30px;
         }
 
         .answer-review h3 {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             font-weight: 700;
             color: var(--text-primary);
-            font-size: 1.6rem; /* ขนาดใหญ่ขึ้น */
+            font-size: 1.7rem;
         }
 
         .answer-item {
             background: var(--card-bg);
             border-radius: var(--element-radius);
-            padding: 22px; /* เพิ่ม padding */
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px var(--shadow-light);
-            border: 1px solid var(--border-color);
+            padding: 25px;
+            margin-bottom: 22px;
+            box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
+                        -6px -6px 12px var(--neumorphic-light-shadow); /* เงา Soft UI */
+            border: none; /* ไม่มีขอบ */
             transition: all 0.2s ease;
         }
 
         .answer-item.correct-border {
-            border-color: var(--accent-green);
-            box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.2), 0 2px 10px var(--shadow-light);
+            border-color: var(--accent-green); /* ใช้ border-color สำหรับสถานะ */
+            box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.25), 6px 6px 12px var(--neumorphic-dark-shadow);
         }
 
         .answer-item.incorrect-border {
-            border-color: var(--accent-red);
-            box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.2), 0 2px 10px var(--shadow-light);
+            border-color: var(--accent-red); /* ใช้ border-color สำหรับสถานะ */
+            box-shadow: 0 0 0 4px rgba(255, 59, 48, 0.25), 6px 6px 12px var(--neumorphic-dark-shadow);
         }
 
         .answer-item p {
-            margin-bottom: 8px;
-            line-height: 1.5;
+            margin-bottom: 10px;
+            line-height: 1.6;
         }
 
         .answer-item strong {
@@ -330,9 +364,9 @@
 
         .answer-item .question-text {
             font-weight: 600;
-            margin-bottom: 12px; /* เพิ่ม margin-bottom */
+            margin-bottom: 15px;
             color: var(--text-primary);
-            font-size: 1.15rem; /* ขนาดใหญ่ขึ้น */
+            font-size: 1.2rem;
         }
 
         .answer-item .user-answer {
@@ -350,101 +384,103 @@
         }
         
         .answer-item .explanation {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px dashed var(--border-color);
-            font-size: 0.95em;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--neumorphic-dark-shadow); /* เส้นประ */
+            font-size: 1em;
             color: var(--text-secondary);
         }
 
-        /* --- New/Modified Styles for Login Page Layout --- */
-        #loginBox button {
-            width: 100%;
-            margin-top: 35px; /* เพิ่ม margin-top */
-        }
-
-        /* Custom modal styles (iOS-like) */
+        /* Custom Confirmation Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Overlay ที่ทึบขึ้น */
+            background-color: rgba(0, 0, 0, 0.65);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(10px); /* Frosted glass effect ที่ชัดขึ้น */
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
         .modal-content {
             background: var(--card-bg);
-            padding: 2.5rem; /* เพิ่ม padding */
+            padding: 2.8rem;
             border-radius: var(--card-radius);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3); /* เงาที่ชัดเจนมากสำหรับ modal */
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
             text-align: center;
-            max-width: 400px; /* ขยาย modal เล็กน้อย */
+            max-width: 420px;
             width: 90%;
             color: var(--text-primary);
-            border: 1px solid rgba(0,0,0,0.1); /* Light border */
+            border: none; /* ไม่มีขอบ */
         }
         .modal-content button {
             width: auto;
             flex-grow: 0;
-            margin: 0 12px; /* เพิ่มระยะห่างระหว่าง modal buttons */
-            padding: 14px 28px; /* เพิ่ม padding */
+            margin: 0 15px;
+            padding: 16px 30px;
             border-radius: var(--element-radius);
             font-weight: 600;
-            box-shadow: none; /* Modal buttons have flat appearance initially */
-            transform: none; /* No lift */
+            box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
+                        -6px -6px 12px var(--neumorphic-light-shadow); /* เงา Soft UI */
+            transform: none; /* No lift initially for modal buttons */
         }
         
         #confirmSubmit {
             background-color: var(--accent-red);
             color: white;
-            box-shadow: 0 3px 10px rgba(255, 59, 48, 0.3);
+            box-shadow: 6px 6px 12px rgba(255, 59, 48, 0.35), 
+                        -6px -6px 12px var(--neumorphic-light-shadow);
         }
         #confirmSubmit:hover {
             background-color: #cc2b22;
-            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
+            box-shadow: 8px 8px 15px rgba(255, 59, 48, 0.45), 
+                        -8px -8px 15px var(--neumorphic-light-shadow);
         }
         #confirmSubmit:active {
             background-color: #b2251d;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.25), 
+                        inset -4px -4px 8px rgba(255, 255, 255, 0.25);
         }
 
         #cancelSubmit {
-            background-color: var(--bg-color); /* ใช้สีพื้นหลังโดยรวม */
-            color: var(--accent-blue);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 3px 10px var(--shadow-light);
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            border: none;
+            box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
+                        -6px -6px 12px var(--neumorphic-light-shadow);
         }
         #cancelSubmit:hover {
-            background-color: #f2f2f2;
-            box-shadow: 0 4px 12px var(--shadow-medium);
+            background-color: #f5f5f5;
+            box-shadow: 8px 8px 15px var(--neumorphic-dark-shadow), 
+                        -8px -8px 15px var(--neumorphic-light-shadow);
         }
         #cancelSubmit:active {
-            background-color: #e8e8e8;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            background-color: #ededed;
+            box-shadow: inset 4px 4px 8px var(--neumorphic-dark-shadow), 
+                        inset -4px -4px 8px var(--neumorphic-light-shadow);
         }
 
         /* Close button (X) */
         #closeButton {
             position: absolute;
-            top: 20px; /* เพิ่มระยะห่างจากขอบ */
-            right: 20px;
+            top: 22px;
+            right: 22px;
             background: var(--bg-color);
             border-radius: 50%;
-            width: 40px; /* Larger touch target */
-            height: 40px;
+            width: 48px; /* Larger */
+            height: 48px; /* Larger */
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.8rem; /* Larger X */
+            font-size: 2.2rem; /* Larger X */
             color: var(--text-secondary);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); /* Soft shadow */
-            transition: all 0.2s ease;
+            box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
+                        -6px -6px 12px var(--neumorphic-light-shadow); /* Soft UI shadow */
+            transition: all 0.3s ease;
             cursor: pointer;
             border: none;
             padding: 0;
@@ -452,49 +488,70 @@
         }
 
         #closeButton:hover {
-            background-color: #e5e5ea;
+            background-color: #ebf0f5;
             color: var(--text-primary);
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 8px 8px 15px var(--neumorphic-dark-shadow), 
+                        -8px -8px 15px var(--neumorphic-light-shadow);
         }
         #closeButton:active {
-            background-color: #d1d1d6;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            background-color: #d8dee6;
+            box-shadow: inset 4px 4px 8px var(--neumorphic-dark-shadow), 
+                        inset -4px -4px 8px var(--neumorphic-light-shadow);
             transform: translateY(1px);
         }
 
         @media (max-width: 480px) {
             .container {
-                padding: 25px 20px;
+                padding: 30px 25px;
                 margin: 15px;
-                border-radius: 14px;
+                border-radius: 20px;
             }
             
+            .app-title {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+
             h2 {
-                font-size: 1.8rem;
-                margin-bottom: 25px;
+                font-size: 2rem;
+                margin-bottom: 30px;
             }
             h4 {
-                font-size: 1.1rem;
-                margin-bottom: 20px;
+                font-size: 1.15rem;
+                margin-bottom: 22px;
             }
 
             label {
-                font-size: 0.95rem;
+                font-size: 1rem;
+                margin-bottom: 10px;
             }
 
-            input, button, .option {
-                padding: 14px 18px;
-                font-size: 1rem;
-                border-radius: 10px;
+            input {
+                padding: 15px 20px;
+                font-size: 1.1rem;
+                border-radius: 12px;
+            }
+            
+            button {
+                padding: 15px 25px;
+                font-size: 1.2rem;
+                border-radius: 12px;
+            }
+            
+            #loginBox button {
+                margin-top: 30px;
             }
 
             .option {
-                margin: 10px 0;
+                padding: 16px 22px;
+                font-size: 1.05rem;
+                margin: 12px 0;
+                border-radius: 12px;
             }
 
             .button-group {
-                gap: 10px;
-                margin-top: 25px;
+                gap: 12px;
+                margin-top: 30px;
             }
             .button-group button {
                 width: 100%;
@@ -502,35 +559,38 @@
             }
 
             .modal-content {
-                padding: 2rem;
+                padding: 2.2rem;
             }
             .modal-content button {
-                margin: 0 8px;
-                padding: 12px 20px;
+                margin: 0 10px;
+                padding: 14px 22px;
+                font-size: 1.1rem;
             }
             #closeButton {
-                top: 15px;
-                right: 15px;
-                width: 36px;
-                height: 36px;
-                font-size: 1.6rem;
+                top: 18px;
+                right: 18px;
+                width: 40px;
+                height: 40px;
+                font-size: 2rem;
             }
 
             .answer-item {
-                padding: 18px;
+                padding: 20px;
             }
             .answer-review h3 {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
             }
             .answer-item .question-text {
-                font-size: 1.05rem;
+                font-size: 1.1rem;
             }
         }
     </style>
 </head>
 <body>
 <div class="container">
+    <!-- หน้าล็อกอิน (แสดงเป็นหน้าแรก) -->
     <div id="loginBox" style="display:block;">
+        <p class="app-title">Quiz App</p> <!-- เพิ่มข้อความ "Quiz App" -->
         <h2>เข้าสู่ระบบ</h2>
         <div class="form-group">
             <label for="usernameInput">ชื่อผู้ใช้:</label>
@@ -540,12 +600,15 @@
         <div id="loginMessage" class="message" style="display:none;"></div>
     </div>
 
+    <!-- หน้าโหลด (ซ่อนไว้ตอนเริ่มต้น) -->
     <div id="loadingBox" class="loading" style="display:none;">
         <div class="spinner"></div>
         <p>กำลังโหลดข้อสอบ...</p>
     </div>
 
+    <!-- หน้าสอบ (ซ่อนไว้ตอนเริ่มต้น) -->
     <div id="quizBox" class="question-box" style="display:none;">
+        <!-- Close button (X) for early submission -->
         <button id="closeButton" class="">
             &times;
         </button>
@@ -564,6 +627,7 @@
         </div>
     </div>
 
+    <!-- หน้าผลลัพธ์ (ซ่อนไว้ตอนเริ่มต้น) -->
     <div id="resultBox" class="result-box" style="display:none;">
         <h2>ผลลัพธ์การสอบ</h2>
         <div id="scoreDisplay"></div>
@@ -572,6 +636,7 @@
     </div>
 </div>
 
+<!-- Custom Confirmation Modal -->
 <div id="confirmationModal" class="modal-overlay hidden">
     <div class="modal-content">
         <p class="text-xl font-semibold mb-4">ยืนยันการส่งคำตอบ</p>
@@ -763,7 +828,7 @@ function previousQuestion() {
     }
 }
 
-// 4. ฟังก์ชันแสดงผลลัพธ์และบันทึก
+// 4. ฟังก์ชันแสดงผลลัพธ์ (โดยไม่มีการบันทึก)
 async function showResult() {
     switchView('resultBox');
     
@@ -776,12 +841,14 @@ async function showResult() {
         }
     }
     const percentage = (questions.length > 0) ? (correctCount / questions.length) * 100 : 0;
-    // แสดงผลคะแนน
+    
+    // แสดงผล ชื่อผู้ใช้, คะแนน, เปอร์เซ็นต์
     document.getElementById('scoreDisplay').innerHTML = `
         <div class="message success">
-            <h3>คะแนนของคุณ: ${percentage.toFixed(1)}%</h3>
-            <p>คุณ ${displayUserName ||
-            userName} ตอบถูก ${correctCount} ข้อ จากทั้งหมด ${questions.length} ข้อ</p>
+            <h3>ผลสอบของคุณ</h3>
+            <p><strong>ชื่อผู้ใช้:</strong> ${displayUserName || userName}</p>
+            <p><strong>ตอบถูก:</strong> ${correctCount} ข้อ จากทั้งหมด ${questions.length} ข้อ</p>
+            <p><strong>คะแนน:</strong> ${percentage.toFixed(1)}%</p>
             <p>ใช้เวลา ${Math.floor(timeSpent / 60)} นาที ${timeSpent % 60} วินาที</p>
         </div>
     `;
@@ -806,48 +873,14 @@ async function showResult() {
         answerReviewContainer.appendChild(answerItemDiv);
     });
 
-    // บันทึกผลสอบ
-    try {
-        const resultData = {
-            userName: userName,
-            userCode: '', // ไม่ได้ใช้แล้ว
-            score: percentage, 
-            correctAnswers: correctCount, 
-            totalQuestions: questions.length,
-            answers: userAnswers,
-            timeSpent: timeSpent,
-            ipAddress: '' // ต้องดึงจากฝั่ง server-side (Apps Script) หากต้องการ
-        };
-        const saveResponse = await fetch(SCRIPT_URL, { // Capture response
-            method: 'POST',
-            body: JSON.stringify(resultData),
-            headers: { "Content-Type": "application/json" }
-        });
-        if (!saveResponse.ok) { // Check if save was successful
-            throw new Error(`Failed to save result: ${saveResponse.statusText}`);
-        }
-        const saveResultData = await saveResponse.json(); // Parse response
-        if (saveResultData.success) {
-            console.log("บันทึกผลสอบสำเร็จ:", saveResultData.message);
-            // Optionally show a success message on the result page
-            // showMessage("บันทึกผลสอบสำเร็จ!", "success", "scoreDisplay");
-        } else {
-            console.error("เกิดข้อผิดพลาดในการบันทึกผลสอบ:", saveResultData.message);
-            // Optionally show an error message on the result page
-            // showMessage(`เกิดข้อผิดพลาดในการบันทึกผลสอบ: ${saveResultData.message}`, "error", "scoreDisplay");
-        }
-        
-    } catch (error) {
-        console.error('เกิดข้อผิดพลาดในการบันทึกผลสอบ:', error);
-        // You might want to show this error on the result page
-        showMessage(`เกิดข้อผิดพลาดในการบันทึกผลสอบ: ${error.message}`, "error", "scoreDisplay");
-    }
+    // *** ส่วนของการบันทึกผลสอบถูกลบออกแล้ว ***
+    console.log("การบันทึกผลสอบถูกปิดการใช้งาน");
 }
 
 // Function to handle early quiz submission
 function submitQuizEarly() {
     console.log("Attempting to submit quiz early...");
-    // Directly call showResult to calculate score, display results, and save.
+    // Directly call showResult to calculate score, display results, and show results.
     showResult();
 }
 
