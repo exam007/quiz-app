@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>แบบทดสอบ ภาค ก. ท้องถิ่น กฎหมาย 200 ข้อ</title>
+    <!-- Inter Font สำหรับ Typography ที่ทันสมัยและสะอาดตา -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN (สำหรับ utility และ modal, แต่ส่วนใหญ่เป็น custom CSS) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -14,7 +16,7 @@
             --text-primary: #333; /* สีข้อความหลักที่เข้มขึ้นเล็กน้อย */
             --text-secondary: #6b6b6b; /* สีข้อความรอง */
             
-            /* Shadows สำหรับองค์ประกอบ Soft UI */
+            /* Shadows สำหรับองค์ประกอบ Soft UI (ยังคงอยู่สำหรับกล่องหลักและ option) */
             --neumorphic-light-shadow: #ffffff; /* เงาสว่างสำหรับด้านบน/ซ้าย */
             --neumorphic-dark-shadow: #a7a9af; /* เงาเข้มสำหรับด้านล่าง/ขวา */
 
@@ -23,7 +25,7 @@
             --accent-green: #34c759; /* สีเขียว iOS */
 
             --card-radius: 24px; /* ขอบโค้งของ Card ที่กลมขึ้น */
-            --element-radius: 16px; /* ขอบโค้งสำหรับปุ่ม, input, option ที่กลมขึ้น */
+            --element-radius: 16px; /* ขอบโค้งสำหรับ option */
         }
 
         * {
@@ -84,89 +86,78 @@
         }
 
         .form-group {
-            margin-bottom: 30px;
+            margin-bottom: 50px;
         }
 
-        label {
-            display: block;
-            margin-bottom: 15px; /* เพิ่มระยะห่าง */
-            font-weight: 600;
-            color: var(--text-secondary);
-            font-size: 1.1rem; /* ขนาดใหญ่ขึ้นเล็กน้อย */
-            text-align: center; /* จัดกึ่งกลาง label */
-        }
-
+        /* Input field style (ชื่อผู้ใช้งาน) */
         input {
             width: 100%;
-            padding: 18px 25px; /* ปรับ padding ให้ดูใหญ่ขึ้นเล็กน้อย */
-            border-radius: var(--element-radius);
-            font-size: 1.2rem; /* เพิ่มขนาด font */
-            border: none; /* ไม่มีขอบ */
-            background: var(--bg-color); /* สีพื้นหลังของ input ให้เข้ากับพื้นหลังโดยรวม */
+            padding: 20px 30px; /* ปรับ padding ให้ดูสูงขึ้นและโค้งมน */
+            border-radius: 9999px; /* ทำให้โค้งมนเป็นรูปแคปซูล */
+            font-size: 30rem; /* เพิ่มขนาด font */
+            border: 1px solid #ccc; /* เพิ่มขอบบางๆ */
+            background: white; /* สีพื้นหลังขาว */
             color: var(--text-primary);
-            /* เงาแบบกดจมลง (inset) สำหรับ Soft UI */
-            box-shadow: inset 5px 5px 10px var(--neumorphic-dark-shadow), 
-                        inset -5px -5px 10px var(--neumorphic-light-shadow);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* เงาอ่อนๆ ด้านนอก */
             transition: all 0.3s ease;
+            text-align: center; /* จัดข้อความ placeholder ให้อยู่ตรงกลาง */
         }
 
         input:focus {
             outline: none;
-            border: none;
-            /* เงาเรืองแสงที่นุ่มนวลขึ้นเมื่อ focus */
-            box-shadow: inset 3px 3px 6px var(--neumorphic-dark-shadow), 
-                        inset -3px -3px 6px var(--neumorphic-light-shadow), 
-                        0 0 0 4px rgba(0, 122, 255, 0.3);
+            border-color: var(--accent-blue); /* สีขอบเมื่อ focus */
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2); /* เงาเรืองแสงเมื่อ focus */
         }
 
         input::placeholder {
-            color: var(--text-secondary);
-            opacity: 0.75;
+            text-align: center;
+            font-weight: 500;
+            color: #999;
         }
 
         .button-group {
             display: flex;
-            gap: 18px;
+            gap: 30px;
             margin-top: 35px;
             width: 100%;
             flex-wrap: wrap;
+            justify-content: space-between; /* จัดให้ปุ่มอยู่คนละฝั่ง */
         }
 
         .button-group button {
-            width: 50%;
-            flex-grow: 1;
+            width: auto; /* ให้ความกว้างปรับตามเนื้อหา */
+            min-width:120px; /* กำหนดความกว้างขั้นต่ำ */
+            flex-grow: 1; /* ให้ปุ่มขยายตัวได้ */
             margin-top: 0;
         }
 
+        /* สไตล์ปุ่มหลักทั้งหมด (รวมถึงปุ่มล็อกอิน, ถัดไป, ย้อนกลับ, ทำใหม่, ยกเลิกใน Modal) */
         button {
-            padding: 18px 30px; /* เพิ่ม padding ให้ปุ่มดูใหญ่และสูงขึ้น */
-            border-radius: var(--element-radius);
-            font-size: 1.3rem; /* เพิ่มขนาด font ให้ปุ่มดูใหญ่ขึ้นอย่างชัดเจน */
+            padding: 30px 50px; /* ปรับ padding ให้ดูสั้นลงและเท่ากับปุ่ม login */
+            border-radius: 9999px; /* ทำให้โค้งมนเป็นรูปแคปซูล */
+            font-size:30rem; /* ปรับขนาด font ให้เท่ากับปุ่ม login */
             border: none;
-            background: var(--accent-blue);
-            color: white;
+            background: linear-gradient(to right, #67bdfc, #4facfe); /* สีฟ้า gradient */
+            color: white; /* สีข้อความขาว */
             font-weight: 600;
             cursor: pointer;
-            /* เงาแบบยกตัวขึ้นสำหรับ Soft UI */
-            box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
-                        -6px -6px 12px var(--neumorphic-light-shadow);
+            /* เงาใหม่ */
+            box-shadow: 0 4px 14px rgba(79, 172, 254, 0.4); /* เงาสำหรับ gradient */
             transition: all 0.3s ease;
             -webkit-appearance: none;
         }
 
         button:hover:not(:disabled) {
-            background-color: #006ddb; /* สีน้ำเงินเข้มขึ้นเมื่อ hover */
-            box-shadow: 8px 8px 15px var(--neumorphic-dark-shadow), 
-                        -8px -8px 15px var(--neumorphic-light-shadow);
+            opacity: 0.95;
+            box-shadow: 0 6px 18px rgba(79, 172, 254, 0.5);
+            background: linear-gradient(to right, #56a7eb, #3a97e6); /* gradient เข้มขึ้นเล็กน้อยเมื่อ hover */
             transform: translateY(-2px); /* ยกตัวขึ้นเล็กน้อย */
         }
 
         button:active:not(:disabled) {
             transform: translateY(0);
-            /* เงาแบบกดจมลงเมื่อกด */
-            box-shadow: inset 4px 4px 8px var(--neumorphic-dark-shadow), 
-                        inset -4px -4px 8px var(--neumorphic-light-shadow);
-            background-color: #005aab;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, #4596d0, #2f7ecb); /* gradient เข้มขึ้นเมื่อ active */
         }
 
         button:disabled {
@@ -174,37 +165,64 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none; /* ไม่มีเงาเมื่อ disabled */
-            background-color: #a7d9ff;
-        }
-
-        /* Secondary buttons (Back, Cancel) */
-        .button-group #backBtn, #cancelSubmit {
-            background: var(--bg-color); /* ใช้สีพื้นหลังโดยรวมสำหรับปุ่มรอง */
-            color: var(--text-primary); /* ใช้สีข้อความหลัก */
-            box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
-                        -6px -6px 12px var(--neumorphic-light-shadow); /* เงาแบบยกตัวขึ้น */
-            border: none;
-        }
-
-        .button-group #backBtn:hover:not(:disabled), #cancelSubmit:hover {
-            background-color: #ebf0f5; /* Lighter hover สำหรับปุ่มรอง */
-            box-shadow: 8px 8px 15px var(--neumorphic-dark-shadow), 
-                        -8px -8px 15px var(--neumorphic-light-shadow);
-            color: var(--text-primary);
-        }
-
-        .button-group #backBtn:active:not(:disabled), #cancelSubmit:active {
-            background-color: #d8dee6;
-            box-shadow: inset 4px 4px 8px var(--neumorphic-dark-shadow), 
-                        inset -4px -4px 8px var(--neumorphic-light-shadow);
+            background: linear-gradient(to right, #a7a9af, #c0c2c7); /* สีเทาอ่อน gradient เมื่อ disabled */
         }
         
-        /* ปุ่มล็อกอิน: จัดกึ่งกลางและมีขนาดที่เหมาะสม (เต็มความกว้างใน container) */
-        #loginBox button {
+        /* ปุ่มล็อกอิน: จัดกึ่งกลางและมีขนาดที่เหมาะสม (ใช้สไตล์ปุ่มทั่วไป) */
+        #loginBox button { 
             display: block;
-            width: 100%; /* ทำให้เต็มความกว้างของ container */
-            max-width: none; /* ยกเลิก max-width เดิม */
-            margin: 40px 0 0; /* ไม่มี auto margin เพราะเต็ม width */
+            width:150px; /* ให้ความกว้างปรับตามเนื้อหา */
+            min-width: 200px; /* กำหนดความกว้างขั้นต่ำ */
+            max-width: 280px; /* กำหนดความกว้างสูงสุด */
+            margin: 40px auto 0; /* จัดกึ่งกลางแนวนอน */
+        }
+
+        /* ปุ่ม "ส่งคำตอบ" ใน Modal (สีแดง) */
+        #confirmSubmit {
+            background: var(--accent-red); /* สีแดง */
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 59, 48, 0.35);
+        }
+        #confirmSubmit:hover {
+            background-color: #cc2b22;
+            box-shadow: 0 6px 15px rgba(255, 59, 48, 0.45);
+        }
+        #confirmSubmit:active {
+            background-color: #b2251d;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        /* ปุ่มปิด (X) */
+        #closeButton {
+            position: absolute;
+            top: 22px;
+            right: 22px;
+            background: #eee; /* สีพื้นหลังเทาอ่อน */
+            border-radius: 50%; /* ยังคงเป็นวงกลม */
+            width: 48px; /* ขนาดใหญ่ขึ้น */
+            height: 48px; /* ขนาดใหญ่ขึ้น */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.2rem; /* ขนาด X ใหญ่ขึ้น */
+            color: #333; /* สีข้อความดำ */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* เงาใหม่ */
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+            line-height: 1;
+        }
+
+        #closeButton:hover {
+            background-color: #ddd;
+            color: #111;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        #closeButton:active {
+            background-color: #ccc;
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.4);
+            transform: translateY(1px);
         }
 
         .option {
@@ -420,46 +438,24 @@
             flex-grow: 0;
             margin: 0 15px;
             padding: 16px 30px;
-            border-radius: var(--element-radius);
+            border-radius: 9999px; /* ทำให้โค้งมนเป็นรูปแคปซูล */
             font-weight: 600;
-            box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
-                        -6px -6px 12px var(--neumorphic-light-shadow); /* เงา Soft UI */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* เงาใหม่ */
             transform: none; /* ไม่มี lift เริ่มต้นสำหรับปุ่มในโมดอล */
         }
         
         #confirmSubmit {
-            background-color: var(--accent-red);
+            background: var(--accent-red); /* สีแดง */
             color: white;
-            box-shadow: 6px 6px 12px rgba(255, 59, 48, 0.35), 
-                        -6px -6px 12px var(--neumorphic-light-shadow);
+            box-shadow: 0 4px 10px rgba(255, 59, 48, 0.35);
         }
         #confirmSubmit:hover {
             background-color: #cc2b22;
-            box-shadow: 8px 8px 15px rgba(255, 59, 48, 0.45), 
-                        -8px -8px 15px var(--neumorphic-light-shadow);
+            box-shadow: 0 6px 15px rgba(255, 59, 48, 0.45);
         }
         #confirmSubmit:active {
             background-color: #b2251d;
-            box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.25), 
-                        inset -4px -4px 8px rgba(255, 255, 255, 0.25);
-        }
-
-        #cancelSubmit {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            border: none;
-            box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
-                        -6px -6px 12px var(--neumorphic-light-shadow);
-        }
-        #cancelSubmit:hover {
-            background-color: #f5f5f5;
-            box-shadow: 8px 8px 15px var(--neumorphic-dark-shadow), 
-                        -8px -8px 15px var(--neumorphic-light-shadow);
-        }
-        #cancelSubmit:active {
-            background-color: #ededed;
-            box-shadow: inset 4px 4px 8px var(--neumorphic-dark-shadow), 
-                        inset -4px -4px 8px var(--neumorphic-light-shadow);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6);
         }
 
         /* ปุ่มปิด (X) */
@@ -467,17 +463,16 @@
             position: absolute;
             top: 22px;
             right: 22px;
-            background: var(--bg-color);
-            border-radius: 50%;
+            background: #eee; /* สีพื้นหลังเทาอ่อน */
+            border-radius: 50%; /* ยังคงเป็นวงกลม */
             width: 48px; /* ขนาดใหญ่ขึ้น */
             height: 48px; /* ขนาดใหญ่ขึ้น */
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 2.2rem; /* ขนาด X ใหญ่ขึ้น */
-            color: var(--text-secondary);
-            box-shadow: 6px 6px 12px var(--neumorphic-dark-shadow), 
-                        -6px -6px 12px var(--neumorphic-light-shadow); /* เงา Soft UI */
+            color: #333; /* สีข้อความดำ */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* เงาใหม่ */
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
@@ -486,15 +481,13 @@
         }
 
         #closeButton:hover {
-            background-color: #ebf0f5;
-            color: var(--text-primary);
-            box-shadow: 8px 8px 15px var(--neumorphic-dark-shadow), 
-                        -8px -8px 15px var(--neumorphic-light-shadow);
+            background-color: #ddd;
+            color: #111;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         #closeButton:active {
-            background-color: #d8dee6;
-            box-shadow: inset 4px 4px 8px var(--neumorphic-dark-shadow), 
-                        inset -4px -4px 8px var(--neumorphic-light-shadow);
+            background-color: #ccc;
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.4);
             transform: translateY(1px);
         }
 
@@ -527,16 +520,16 @@
             input {
                 padding: 15px 20px;
                 font-size: 1.1rem;
-                border-radius: 12px;
+                border-radius: 9999px; /* ยังคงเป็นแคปซูลบนมือถือ */
             }
             
             button {
                 padding: 15px 25px;
                 font-size: 1.2rem;
-                border-radius: 12px;
+                border-radius: 9999px; /* ยังคงเป็นแคปซูลบนมือถือ */
             }
             
-            #loginBox button {
+            #loginBox button { /* ใช้ selector นี้สำหรับปุ่มล็อกอิน */
                 margin-top: 30px;
             }
 
@@ -563,6 +556,7 @@
                 margin: 0 10px;
                 padding: 14px 22px;
                 font-size: 1.1rem;
+                border-radius: 9999px; /* ยังคงเป็นแคปซูลบนมือถือ */
             }
             #closeButton {
                 top: 18px;
@@ -586,22 +580,28 @@
 </head>
 <body>
 <div class="container">
+    <!-- หน้าล็อกอิน (แสดงเป็นหน้าแรก) -->
     <div id="loginBox" style="display:block;">
-        <p class="app-title">Quiz App</p> <h2>เข้าสู่ระบบ</h2>
+        <p class="app-title">แบบทดสอบ ภาค ก. ท้องถิ่น กฎหมาย 200 ข้อ</p>
+    
         <div class="form-group">
-            <label for="usernameInput">ชื่อผู้ใช้:</label>
-            <input type="text" id="usernameInput" placeholder="กรอกชื่อผู้ใช้ของคุณ">
+            <input type="text" id="usernameInput" placeholder="ชื่อผู้ใช้งาน"
+            class="w-full text-xl px-6 py-4 rounded-full border border-gray-300 shadow-sm text-center placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
-        <button onclick="attemptLogin()">เข้าสู่ระบบ</button>
-        <div id="loginMessage" class="message" style="display:none;"></div>
+        <button onclick="attemptLogin()"
+         class="text-xl px-8 py-4 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 text-white font-semibold shadow-md hover:opacity-90">เข้าสู่ระบบ</button>
+        <div id="loginMessage" class="message" style="display: none;"></div>
     </div>
 
+    <!-- หน้าโหลด (ซ่อนไว้ตอนเริ่มต้น) -->
     <div id="loadingBox" class="loading" style="display:none;">
         <div class="spinner"></div>
         <p>กำลังโหลดข้อสอบ...</p>
     </div>
 
+    <!-- หน้าสอบ (ซ่อนไว้ตอนเริ่มต้น) -->
     <div id="quizBox" class="question-box" style="display:none;">
+        <!-- Close button (X) สำหรับการจบข้อสอบก่อนเวลา -->
         <button id="closeButton" class="">
             &times;
         </button>
@@ -615,11 +615,15 @@
         <div id="options"></div>
         
         <div class="button-group">
-            <button id="nextBtn" onclick="nextQuestion()">ถัดไป</button>
-            <button id="backBtn" onclick="previousQuestion()">ย้อนกลับ</button>
+            <!-- สลับลำดับของปุ่มเพื่อให้ "ย้อนกลับ" อยู่ซ้ายและ "ถัดไป" อยู่ขวา -->
+            <button id="backBtn" onclick="previousQuestion()" 
+            class="text-xl px-8 py-4 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 text-white font-semibold shadow-md hover:opacity-90">ย้อนกลับ</button>
+            <button id="nextBtn" onclick="nextQuestion()"
+             class="text-xl px-8 py-4 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 text-white font-semibold shadow-md hover:opacity-90">ถัดไป</button>
         </div>
     </div>
 
+    <!-- หน้าผลลัพธ์ (ซ่อนไว้ตอนเริ่มต้น) -->
     <div id="resultBox" class="result-box" style="display:none;">
         <h2>ผลลัพธ์การสอบ</h2>
         <div id="scoreDisplay"></div>
@@ -628,6 +632,7 @@
     </div>
 </div>
 
+<!-- Custom Confirmation Modal (โมดอลยืนยัน) -->
 <div id="confirmationModal" class="modal-overlay hidden">
     <div class="modal-content">
         <p class="text-xl font-semibold mb-4">ยืนยันการส่งคำตอบ</p>
